@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#0d7a4f" />
+<meta name="description" content="مغامرة إنّ وأخواتها — درس تفاعلي للصف الخامس، لغتي الجميلة. فاطمة ترشد لاستعادة مفاتيح قلعة نزوى." />
+<title>مغامرة إنّ وأخواتها — الصف الخامس</title>
+<style>
+  :root {
+    --red: #c8102e;
+    --green: #0d7a4f;
+    --green-d: #085c3c;
+    --sand: #fff6e4;
+    --gold: #f6c445;
+    --sea: #1287b0;
+    --ink: #1f2937;
+    --card: #ffffff;
+    --line: #ead9b0;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Geeza Pro", "Noto Naskh Arabic", "Noto Sans Arabic", Tahoma, "Segoe UI", sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    background: linear-gradient(180deg, #d9f3ff 0%, #fff6e4 42%, #e7f8ef 100%);
+    overflow-x: hidden;
+  }
+  body.theme-s1 { background: linear-gradient(180deg, #ffd0d6 0%, #fff1c9 48%, #ffe0bf 100%); }
+  body.theme-s2 { background: linear-gradient(180deg, #7ed9cc 0%, #e7fff8 42%, #b7e6ff 100%); }
+  body.theme-s3 { background: linear-gradient(180deg, #e4c096 0%, #f8ead2 46%, #c9a27a 100%); }
+  body.theme-s4 { background: linear-gradient(180deg, #6eb7ea 0%, #e5f6ff 36%, #ffd98a 100%); }
+  body.theme-s5 { background: linear-gradient(180deg, #ffd5dc 0%, #fff 42%, #c9f2d8 100%); }
+  body.theme-win { background: linear-gradient(180deg, #ffe4ea 0%, #fff 40%, #bbf7d0 100%); }
+  .decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .decor i {
+    position: absolute; opacity: 0.45; font-style: normal; font-size: 1.4rem;
+    animation: drift linear infinite;
+  }
+  @keyframes drift {
+    from { transform: translateY(0); }
+    to { transform: translateY(-14px); }
+  }
+  @keyframes pop {
+    0% { transform: scale(0.86); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    30% { transform: translateX(6px); }
+    60% { transform: translateX(-6px); }
+  }
+  @keyframes fall {
+    to { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+  }
+  .sticky {
+    position: sticky; top: 0; z-index: 8;
+    background: #ffffffee;
+    backdrop-filter: blur(8px);
+    border-bottom: 4px solid var(--green);
+    padding-top: env(safe-area-inset-top);
+  }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.6rem; padding: 0.45rem 0.75rem;
+  }
+  .brand { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+  .brand strong { font-size: 0.98rem; color: var(--green-d); }
+  .keyrow { display: flex; align-items: center; gap: 0.35rem; }
+  .keys { display: flex; gap: 0.15rem; font-size: 1.05rem; }
+  .keys span { opacity: 0.28; filter: grayscale(1); }
+  .keys span.on { opacity: 1; filter: none; }
+  #keycount { font-weight: 800; font-size: 0.82rem; color: #7c5a12; }
+  #mute {
+    border: none; border-radius: 999px; min-height: 48px; min-width: 48px;
+    padding: 0.4rem 0.9rem; font-family: inherit; font-weight: 800; font-size: 1rem;
+    background: #fff; color: var(--green-d); box-shadow: 0 4px 0 #b7e4c7;
+    cursor: pointer; touch-action: manipulation;
+  }
+  #mute[aria-pressed="true"] { background: #fee2e2; box-shadow: 0 4px 0 #fecaca; color: var(--red); }
+  #mute:active { transform: translateY(2px); }
+  .dock {
+    display: flex; gap: 0.4rem; overflow-x: auto; padding: 0 0.7rem 0.55rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .dock button {
+    flex: 0 0 auto; border: none; border-radius: 999px; min-height: 44px;
+    padding: 0.35rem 0.8rem; font-family: inherit; font-weight: 800; font-size: 0.92rem;
+    background: #fff; color: var(--green-d); box-shadow: 0 3px 0 var(--line);
+    cursor: pointer; touch-action: manipulation;
+  }
+  .dock button[aria-current="true"] { background: var(--green); color: #fff; box-shadow: 0 3px 0 var(--green-d); }
+  .dock button:disabled { opacity: 0.45; cursor: default; }
+  .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0.8rem 0.85rem 2.4rem; }
+  .card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 1rem 1rem 1.1rem;
+    border: 3px solid #fff;
+    box-shadow: 0 10px 0 #ead9b088, 0 16px 28px #0001;
+    animation: pop 0.28s ease;
+  }
+  h1 {
+    margin: 0.2rem 0 0.35rem;
+    font-size: clamp(1.7rem, 7vw, 2.35rem);
+    line-height: 1.35;
+    color: var(--red);
+    text-align: center;
+  }
+  .sub { text-align: center; margin: 0 0 0.8rem; font-weight: 800; color: var(--green-d); font-size: 1.05rem; }
+  .banner {
+    border-radius: 20px;
+    padding: 0.85rem 0.95rem;
+    margin-bottom: 0.75rem;
+    min-height: 108px;
+    background: #fffaf0;
+    border-right: 10px solid var(--green);
+    box-shadow: 0 4px 0 var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 0.6rem;
+  }
+  .banner.souq { border-right-color: var(--red); background: repeating-linear-gradient(90deg, #fff6e4 0 14px, #ffe4e6 14px 28px); }
+  .banner.falaj { border-right-color: var(--sea); background: linear-gradient(180deg, #e6fffb, #fff); }
+  .banner.fort { border-right-color: #9a3412; background: linear-gradient(180deg, #f8ead7, #fff); }
+  .banner.sea { border-right-color: var(--sea); background: linear-gradient(180deg, #e0f2fe, #fff7e6 72%); }
+  .banner.muscat { border-right-color: var(--red); background: linear-gradient(135deg, #fff, #ecfdf5 55%, #fff7ed); }
+  .banner h2 { margin: 0; font-size: clamp(1.15rem, 4.5vw, 1.45rem); line-height: 1.45; color: #111827; }
+  .kicker { margin: 0 0 0.15rem; font-weight: 800; color: #7c5a12; font-size: 0.92rem; }
+  .art { flex: 0 0 auto; }
+  .awnings { display: flex; gap: 3px; }
+  .awnings span { width: 18px; height: 64px; border-radius: 4px 4px 0 0; }
+  .awnings span:nth-child(1) { background: var(--red); }
+  .awnings span:nth-child(2) { background: #fff; box-shadow: inset 0 0 0 2px var(--green); }
+  .awnings span:nth-child(3) { background: var(--green); }
+  .awnings span:nth-child(4) { background: var(--red); }
+  .waves { width: 120px; height: 64px; display: block; }
+  .towers { display: flex; align-items: flex-end; gap: 5px; height: 78px; }
+  .towers span { width: 22px; background: #8c6239; border-radius: 3px 3px 0 0; position: relative; }
+  .towers span:nth-child(1) { height: 46px; }
+  .towers span:nth-child(2) { height: 74px; }
+  .towers span:nth-child(3) { height: 56px; }
+  .towers span::before {
+    content: ""; position: absolute; left: -2px; right: -2px; top: -7px; height: 7px;
+    background: linear-gradient(90deg, #8c6239 40%, transparent 40%) 0 0 / 6px 7px;
+  }
+  .sunsea { font-size: 2.7rem; line-height: 1; }
+  .guide { display: flex; gap: 0.65rem; align-items: flex-start; margin: 0.2rem 0 0.85rem; }
+  .who { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; flex: 0 0 auto; }
+  .who small { font-weight: 900; color: var(--red); }
+  .avatar { width: 72px; height: 78px; position: relative; }
+  .scarf {
+    position: absolute; inset: 0 2px 6px;
+    background: linear-gradient(#e11d48, #9f1239);
+    border-radius: 36px 36px 16px 16px;
+    box-shadow: 0 4px 0 #7f1028;
+  }
+  .scarf::after {
+    content: ""; position: absolute; left: 8px; right: 8px; bottom: 12px; height: 7px;
+    background: #fff; border-radius: 4px;
+  }
+  .face {
+    position: absolute; left: 16px; right: 16px; top: 16px; height: 38px;
+    background: #f3c19a; border-radius: 18px;
+  }
+  .face i {
+    position: absolute; top: 13px; width: 6px; height: 6px; background: #1f2937; border-radius: 50%;
+  }
+  .face i:nth-child(1) { right: 8px; }
+  .face i:nth-child(2) { left: 8px; }
+  .face b {
+    position: absolute; left: 14px; right: 14px; bottom: 8px; height: 7px;
+    border-bottom: 3px solid #9f1239; border-radius: 0 0 12px 12px;
+  }
+  .joy { animation: bounce 1s ease-in-out infinite; }
+  .bubble {
+    background: #fff;
+    border: 3px solid #f3e0b0;
+    border-radius: 18px;
+    padding: 0.7rem 0.85rem;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.7;
+    flex: 1;
+    box-shadow: 0 4px 0 #ead9b0;
+  }
+  .path { list-style: none; padding: 0; margin: 0.4rem 0 1rem; display: grid; gap: 0.4rem; }
+  .path li {
+    background: #fff;
+    border-radius: 14px;
+    padding: 0.55rem 0.75rem;
+    font-weight: 800;
+    border: 2px solid var(--line);
+    min-height: 44px;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .path li span { color: var(--red); }
+  ol.steps { margin: 0.2rem 0 0.8rem; padding: 0 1.2rem 0 0; font-weight: 800; line-height: 1.7; }
+  ol.steps li { margin: 0.35rem 0; }
+  .note {
+    background: #f0fdf4; border-radius: 14px; padding: 0.7rem 0.8rem; font-weight: 700; margin: 0.4rem 0 0.8rem;
+  }
+  .btn {
+    border: none; border-radius: 18px; min-height: 52px; padding: 0.7rem 1.2rem;
+    font-family: inherit; font-weight: 900; font-size: 1.05rem; cursor: pointer;
+    background: linear-gradient(135deg, #22c55e, #4ade80); color: #14532d;
+    box-shadow: 0 5px 0 #15803d; touch-action: manipulation;
+  }
+  .btn.gold { background: linear-gradient(135deg, #fbbf24, #fde047); color: #713f12; box-shadow: 0 5px 0 #d97706; }
+  .btn.wide { width: 100%; }
+  .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #15803d; }
+  .btn.gold:active { box-shadow: 0 2px 0 #d97706; }
+  .btn:disabled { opacity: 0.55; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.8rem; }
+  .label { font-weight: 900; color: var(--green-d); margin: 0.55rem 0 0.3rem; }
+  .drop {
+    min-height: 74px; background: #fff; border: 3px dashed #d6b25e; border-radius: 18px;
+    padding: 0.45rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
+  }
+  .drop.alt { border-color: #94a3b8; }
+  .drop.over { background: #ecfdf5; }
+  .pool { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.75rem; min-height: 52px; }
+  .chip {
+    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    color: #fff; padding: 0.55rem 0.9rem; border-radius: 14px; font-weight: 900; font-size: 1.15rem;
+    min-height: 48px; display: inline-flex; align-items: center; cursor: pointer; user-select: none;
+    box-shadow: 0 3px 0 #4338ca; touch-action: manipulation;
+  }
+  .chip.good { background: linear-gradient(135deg, #4ade80, #16a34a); box-shadow: 0 3px 0 #166534; }
+  .chip.bad { background: linear-gradient(135deg, #fb7185, #e11d48); box-shadow: 0 3px 0 #9f1239; animation: shake 0.35s; }
+  .help { font-weight: 700; margin: 0.3rem 0 0.6rem; }
+  .count { text-align: center; font-weight: 900; color: #7c5a12; margin: 0 0 0.4rem; }
+  .sentence {
+    font-size: clamp(1.3rem, 5vw, 1.75rem); font-weight: 900; text-align: center;
+    background: #fffbeb; border-radius: 18px; padding: 0.9rem 0.6rem; line-height: 1.8; margin: 0.3rem 0 0.7rem;
+  }
+  .blank {
+    display: inline-block; min-width: 3.2rem; padding: 0 0.35rem; margin: 0 0.15rem;
+    border-bottom: 4px solid var(--red); color: var(--red);
+  }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+  .choices button, .sent {
+    font-family: inherit; font-weight: 900; font-size: 1.25rem; min-height: 56px;
+    border-radius: 16px; border: 3px solid #e7d3a1; background: #fff; color: var(--ink);
+    cursor: pointer; touch-action: manipulation; padding: 0.45rem 0.5rem;
+  }
+  .sent { display: block; width: 100%; text-align: center; margin: 0.45rem 0; font-size: clamp(1.05rem, 4vw, 1.3rem); line-height: 1.6; }
+  .choices button.correct, .sent.correct, .opts label.correct { background: #dcfce7; border-color: #16a34a; }
+  .choices button.wrong, .sent.wrong, .opts label.wrong { background: #fee2e2; border-color: #ef4444; animation: shake 0.35s; }
+  .rule {
+    background: #fff7ed; border-radius: 14px; padding: 0.65rem 0.75rem; font-weight: 800; margin-bottom: 0.7rem;
+  }
+  .line {
+    display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; justify-content: center;
+    font-size: clamp(1.25rem, 5vw, 1.6rem); font-weight: 900; background: #f0f9ff;
+    border-radius: 18px; padding: 0.9rem 0.6rem; min-height: 78px;
+  }
+  .word {
+    font: inherit; font-weight: 900; font-size: 1.15em; background: #fde68a; color: var(--ink);
+    border: 3px solid #d97706; border-radius: 14px; padding: 0.35rem 0.65rem; min-height: 48px;
+    cursor: pointer; touch-action: manipulation;
+  }
+  .word.fixed { background: #bbf7d0; border-color: #15803d; }
+  .q { margin-bottom: 0.8rem; background: #fff; border-radius: 18px; padding: 0.75rem; border: 2px solid #f3e0b0; }
+  .q p { margin: 0 0 0.45rem; font-weight: 900; }
+  .opts label {
+    display: flex; align-items: center; gap: 0.45rem; background: #fffbeb;
+    padding: 0.65rem 0.75rem; border-radius: 14px; border: 2px solid #ead9b0;
+    margin: 0.35rem 0; cursor: pointer; font-weight: 800; min-height: 48px; line-height: 1.5;
+  }
+  .opts input { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; }
+  .msg { text-align: center; font-weight: 900; min-height: 1.6em; margin: 0.55rem 0 0; font-size: 1.05rem; }
+  .msg.ok { color: #166534; }
+  .msg.bad { color: #9f1239; }
+  .passport {
+    margin: 0.6rem auto 0.4rem; max-width: 420px; background: #fff;
+    border-radius: 18px; overflow: hidden; border: 3px solid var(--green); text-align: center;
+  }
+  .passport header {
+    background: linear-gradient(#c8102e 0 33%, #fff 33% 66%, #0d7a4f 66%);
+    color: #111; font-weight: 900; padding: 0.85rem 0.5rem 0.7rem;
+  }
+  .passport h3 { margin: 0.85rem 0 0.2rem; font-size: 1.5rem; color: var(--red); }
+  .passport .stamp { font-size: 1.25rem; font-weight: 900; margin: 0.2rem 0 0.8rem; }
+  .center { text-align: center; }
+  footer { text-align: center; color: #3f6212; font-weight: 700; font-size: 0.9rem; margin-top: 0.8rem; }
+  footer a { color: var(--green-d); }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); border: 0;
+  }
+  .confetti { position: fixed; pointer-events: none; z-index: 20; width: 12px; height: 12px; border-radius: 2px; animation: fall 1.8s linear forwards; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body class="theme-cover">
+<div class="decor" id="decor" aria-hidden="true"></div>
+<div class="sticky">
+  <div class="topbar">
+    <div class="brand">
+      <strong>مفاتيح قلعة نزوى</strong>
+      <div class="keyrow">
+        <div id="keys" class="keys"></div>
+        <span id="keycount">0 / 5</span>
+      </div>
+    </div>
+    <button type="button" id="mute" aria-pressed="false">🔊 الصوت</button>
+  </div>
+  <nav id="dock" class="dock" hidden></nav>
+</div>
+<main class="wrap">
+  <div data-screen="cover">
+    <div class="card">
+      <div class="guide">
+        <div class="who">
+          <div class="avatar" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+          <small>فاطمة</small>
+        </div>
+        <p class="bubble">مرحبًا! أنا فاطمة. ضاعت مفاتيح قلعة نزوى بين السوق والفلج والبحر. ساعد في إيجادها. كل إجابة صحيحة تُرجع مفتاحًا.</p>
+      </div>
+      <h1>مغامرة إنّ وأخواتها</h1>
+      <p class="sub">الصف الخامس — لغتي الجميلة</p>
+      <ol class="path">
+        <li><span>١</span> سوق مطرح — تعرّف على الأخوات</li>
+        <li><span>٢</span> فلج دارس — اختر الأخت</li>
+        <li><span>٣</span> قلعة نزوى — الاسم والخبر</li>
+        <li><span>٤</span> شاطئ صور — أصلح الجمل</li>
+        <li><span>٥</span> مسقط — التحدّي الختامي</li>
+      </ol>
+      <button type="button" class="btn wide" id="start">ابدأ المغامرة</button>
+    </div>
+  </div>
+
+  <div data-screen="help" hidden>
+    <div class="card">
+      <h2 style="margin-top:0;color:var(--green-d)">قبل الانطلاق</h2>
+      <div class="guide">
+        <div class="who">
+          <div class="avatar" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+          <small>فاطمة</small>
+        </div>
+        <p class="bubble">خمس محطات بالترتيب. المفتاح لا يفتح إلا بعد إتمام المهمة.</p>
+      </div>
+      <ol class="steps">
+        <li>سوق مطرح: تعرّف على إنّ وأخواتها بين البطاقات.</li>
+        <li>فلج دارس: اختر الأخت المناسبة لكل جملة.</li>
+        <li>قلعة نزوى: اختر الجملة ذات الاسم المنصوب والخبر المرفوع.</li>
+        <li>شاطئ صور: أصلح الجمل.</li>
+        <li>مسقط: أجب عن ٥ أسئلة. النجاح بأربعة إجابات صحيحة من خمسة.</li>
+      </ol>
+      <p class="note">زر «الصوت» في أعلى الصفحة يكتم أصوات اللعب أو يشغّلها. الأصوات قصيرة ومختلفة، ولا يوجد صوت يقرأ الجمل.</p>
+      <button type="button" class="btn wide" id="go-s1">إلى سوق مطرح</button>
+    </div>
+  </div>
+
+  <div data-screen="s1" hidden>
+    <div class="card">
+      <div class="banner souq">
+        <div>
+          <p class="kicker">المحطة ١ من ٥</p>
+          <h2>سوق مطرح · تعرّف على إنّ وأخواتها</h2>
+        </div>
+        <div class="art awnings" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="guide">
+        <div class="who">
+          <div class="avatar" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+          <small>فاطمة</small>
+        </div>
+        <p class="bubble">بطاقات السوق اختلطت. ضع أخوات إنّ في الصندوق الذهبي، وأخوات كان في الصندوق الآخر.</p>
+      </div>
+      <p class="help">اضغط البطاقة مرة لتنقلها إلى صندوق إنّ، ومرة ثانية للصندوق الآخر، ومرة ثالثة لإرجاعها. يمكن سحبها أيضًا.</p>
+      <div class="label">إنّ وأخواتها</div>
+      <div class="drop" id="box-inna" data-accept="inna"></div>
+      <div class="label">ليست من أخوات إنّ</div>
+      <div class="drop alt" id="box-kan" data-accept="kan"></div>
+      <div class="pool" id="pool"></div>
+      <p class="msg" id="s1-msg"></p>
+      <div class="actions">
+        <button type="button" class="btn" id="check-s1">تحقق</button>
+        <button type="button" class="btn gold" data-next="0" hidden>إلى فلج دارس</button>
+      </div>
+    </div>
+  </div>
+
+  <div data-screen="s2" hidden>
+    <div class="card">
+      <div class="banner falaj">
+        <div>
+          <p class="kicker">المحطة ٢ من ٥</p>
+          <h2>فلج دارس · اختر الأخت المناسبة</h2>
+        </div>
+        <svg class="art waves" viewBox="0 0 74 36" aria-hidden="true">
+          <path d="M0 22 Q10 12 20 22 T40 22 T60 22 T80 22 V36 H0 Z" fill="#5eead4"/>
+          <path d="M0 16 Q12 8 24 16 T48 16 T74 16" fill="none" stroke="#0f766e" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="guide">
+        <div class="who">
+          <div class="avatar" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+          <small>فاطمة</small>
+        </div>
+        <p class="bubble">ماء الفلج لا يجري إلا بالأخت الصحيحة. اقرأ الجملة، ثم اختر الحرف.</p>
+      </div>
+      <p class="count" id="s2-count"></p>
+      <p class="sentence" id="s2-sentence"></p>
+      <div class="choices" id="s2-choices"></div>
+      <p class="msg" id="s2-msg"></p>
+      <div class="actions">
+        <button type="button" class="btn gold" data-next="1" hidden>إلى قلعة نزوى</button>
+      </div>
+    </div>
+  </div>
+
+  <div data-screen="s3" hidden>
+    <div class="card">
+      <div class="banner fort">
+        <div>
+          <p class="kicker">المحطة ٣ من ٥</p>
+          <h2>قلعة نزوى · اسم إنّ منصوب وخبرها مرفوع</h2>
+        </div>
+        <div class="art towers" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+      <div class="guide">
+        <div class="who">
+          <div class="avatar" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+          <small>فاطمة</small>
+        </div>
+        <p class="bubble">باب القلعة يُفتح بالإعراب الصحيح. اختر الجملة التي فيها اسم منصوب وخبر مرفوع.</p>
+      </div>
+      <p class="rule">إنّ وأخواتها حروف ناسخة: تنصب الاسم وترفع الخبر. مثال: إنّ البحرَ واسعٌ.</p>
+      <p class="count" id="s3-count"></p>
+      <div id="s3-opts"></div>
+      <p class="msg" id="s3-msg"></p>
+      <div class="actions">
+        <button type="button" class="btn gold" data-next="2" hidden>إلى شاطئ صور</button>
+      </div>
+    </div>
+  </div>
+
+  <div data-screen="s4" hidden>
+    <div class="card">
+      <div class="banner sea">
+        <div>
+          <p class="kicker">المحطة ٤ من ٥</p>
+          <h2>شاطئ صور · أصلح الجمل</h2>
+        </div>
+        <div class="art sunsea" aria-hidden="true">☀️🌊</div>
+      </div>
+      <div class="guide">
+        <div class="who">
+          <div class="avatar" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+          <small>فاطمة</small>
+        </div>
+        <p class="bubble">على الشاطئ انكسرت حركات بعض الكلمات. اضغط الكلمة الملوّنة لتبديل حركتها، ثم اضغط تحقق.</p>
+      </div>
+      <p class="count" id="s4-count"></p>
+      <div class="line" id="s4-line"></div>
+      <p class="msg" id="s4-msg"></p>
+      <div class="actions">
+        <button type="button" class="btn" id="check-s4">تحقق</button>
+        <button type="button" class="btn gold" data-next="3" hidden>إلى مسقط</button>
+      </div>
+    </div>
+  </div>
+
+  <div data-screen="s5" hidden>
+    <div class="card">
+      <div class="banner muscat">
+        <div>
+          <p class="kicker">المحطة ٥ من ٥</p>
+          <h2>مسقط · التحدّي الختامي</h2>
+        </div>
+        <div class="art sunsea" aria-hidden="true">🇴🇲</div>
+      </div>
+      <div class="guide">
+        <div class="who">
+          <div class="avatar" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+          <small>فاطمة</small>
+        </div>
+        <p class="bubble">هذه آخر محطة في مسقط. أجب عن الأسئلة. النجاح بأربعة إجابات صحيحة من خمسة.</p>
+      </div>
+      <div id="quiz"></div>
+      <p class="msg" id="s5-msg"></p>
+      <div class="actions">
+        <button type="button" class="btn" id="check-s5">تحقق من الإجابات</button>
+        <button type="button" class="btn" id="retry-s5" hidden>حاول مرة أخرى</button>
+        <button type="button" class="btn gold" data-next="4" hidden>افتح جواز المعرفة</button>
+      </div>
+    </div>
+  </div>
+
+  <div data-screen="win" hidden>
+    <div class="card center">
+      <div class="who" style="margin:0 auto 0.4rem">
+        <div class="avatar joy" aria-hidden="true"><div class="scarf"></div><div class="face"><i></i><i></i><b></b></div></div>
+        <small>فاطمة</small>
+      </div>
+      <p class="bubble" style="text-align:right">عادت المفاتيح، وقلعة نزوى مفتوحة من جديد. أحسنت في إكمال المحطات الخمس.</p>
+      <div class="passport">
+        <header>سلطنة عُمان · لغتي الجميلة · صف ٥</header>
+        <h3>جواز المعرفة — إنّ وأخواتها ✓</h3>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn" id="replay">أعد المغامرة</button>
+      </div>
+    </div>
+  </div>
+  <footer>صف ٥ · لغتي الجميلة · سلطنة عُمان · <a href="../../index.html">كل الدروس</a></footer>
+</main>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<script>
+"use strict";
+const SISTERS = ["إنّ", "أنّ", "كأنّ", "لكنّ", "ليت", "لعلّ"];
+const S1_ITEMS = [
+  { t: "إنّ", g: "inna" }, { t: "أنّ", g: "inna" }, { t: "كأنّ", g: "inna" },
+  { t: "لكنّ", g: "inna" }, { t: "ليت", g: "inna" }, { t: "لعلّ", g: "inna" },
+  { t: "كان", g: "kan" }, { t: "صار", g: "kan" }, { t: "ليس", g: "kan" }, { t: "ظلّ", g: "kan" }
+];
+const S2 = [
+  { text: "…… المعلمةَ مخلصةٌ.", answer: "إنّ", hint: "للتوكيد في أول الجملة: إنّ." },
+  { text: "…… الامتحانَ سهلٌ.", answer: "ليت", hint: "التمني يكون بـ ليت." },
+  { text: "الجوّ حارّ …… النسيمَ عليلٌ.", answer: "لكنّ", hint: "الاستدراك يكون بـ لكنّ." },
+  { text: "…… السماءَ صافيةٌ.", answer: "كأنّ", hint: "التشبيه يكون بـ كأنّ." },
+  { text: "…… النتيجةَ مفرحةٌ.", answer: "لعلّ", hint: "الترجي يكون بـ لعلّ." }
+];
+const S3 = [
+  { correct: "إنّ الطالبةَ مجتهدةٌ.", wrong: "إنّ الطالبةُ مجتهدةً." },
+  { correct: "ليت النجاحَ قريبٌ.", wrong: "ليت النجاحُ قريبًا." },
+  { correct: "كأنّ البحرَ هادئٌ.", wrong: "كأنّ البحرُ هادئًا." },
+  { correct: "لعلّ الفرجَ آتٍ.", wrong: "لعلّ الفرجُ آتيًا." },
+  { correct: "لكنّ الواجبَ سهلٌ.", wrong: "لكنّ الواجبُ سهلًا." }
+];
+const S4 = [
+  { hint: "اسم إنّ منصوب: الطالبَ، والخبر مرفوع.", chunks: [{ text: "إنّ " }, { wrong: "الطالبُ", right: "الطالبَ" }, { text: " نشيطٌ." }] },
+  { hint: "اسم ليت منصوب، وخبرها مرفوع.", chunks: [{ text: "ليت " }, { wrong: "العطلةُ", right: "العطلةَ" }, { text: " " }, { wrong: "طويلةً", right: "طويلةٌ" }, { text: "." }] },
+  { hint: "خبر كأنّ مرفوع: لامعةٌ.", chunks: [{ text: "كأنّ النجومَ " }, { wrong: "لامعةً", right: "لامعةٌ" }, { text: "." }] },
+  { hint: "اسم لعلّ منصوب: المطرَ.", chunks: [{ text: "لعلّ " }, { wrong: "المطرُ", right: "المطرَ" }, { text: " قريبٌ." }] },
+  { hint: "اسم لكنّ منصوب، وخبرها مرفوع.", chunks: [{ text: "لكنّ " }, { wrong: "القصةُ", right: "القصةَ" }, { text: " " }, { wrong: "ممتعةً", right: "ممتعةٌ" }, { text: "." }] }
+];
+const S5 = [
+  { q: "أي الكلمات من أخوات إنّ؟", opts: ["ظلّ", "لعلّ", "صار", "ليس"], a: 1 },
+  { q: "إنّ وأخواتها:", opts: ["تنصب الاسم وترفع الخبر", "ترفع الاسم وتنصب الخبر", "ترفع الاسم والخبر", "تنصب الاسم والخبر"], a: 0 },
+  { q: "اختر الجملة الصحيحة:", opts: ["إنّ الطالبُ نشيطٌ.", "إنّ الطالبَ نشيطٌ.", "إنّ الطالبَ نشيطًا.", "إنّ الطالبُ نشيطًا."], a: 1 },
+  { q: "أكمل: الجوّ حارّ …… النسيمَ عليلٌ.", opts: ["كأنّ", "ليت", "لكنّ", "أنّ"], a: 2 },
+  { q: "في «ليت النجاحَ قريبٌ» خبر ليت هو:", opts: ["ليت", "النجاحَ", "قريبٌ", "النجاحَ قريبٌ"], a: 2 }
+];
+const PLACES = [
+  { id: "s1", short: "١ مطرح" },
+  { id: "s2", short: "٢ دارس" },
+  { id: "s3", short: "٣ نزوى" },
+  { id: "s4", short: "٤ صور" },
+  { id: "s5", short: "٥ مسقط" }
+];
+
+const state = { started: false, cleared: [false, false, false, false, false], screen: "cover" };
+let s2Index = 0, s3Index = 0, s4Index = 0;
+let s2Lock = false, s3Lock = false;
+let celebratedWin = false;
+let audioCtx = null;
+let muted = false;
+
+function shuffle(list) {
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+function announce(text) {
+  const live = document.getElementById("live");
+  live.textContent = "";
+  setTimeout(() => { live.textContent = text; }, 20);
+}
+function setMsg(id, text, ok) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = "msg" + (text ? (ok ? " ok" : " bad") : "");
+  if (text) announce(text);
+}
+
+function ensureAudio() {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return null;
+  if (!audioCtx) audioCtx = new AC();
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  return audioCtx;
+}
+function blip(opts) {
+  if (muted) return;
+  const ac = ensureAudio();
+  if (!ac) return;
+  const t0 = ac.currentTime + (opts.delay || 0);
+  const osc = ac.createOscillator();
+  const gain = ac.createGain();
+  const filter = ac.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.setValueAtTime(opts.cut || 1600, t0);
+  osc.type = opts.type || "sine";
+  osc.frequency.setValueAtTime(opts.from, t0);
+  if (opts.to) osc.frequency.exponentialRampToValueAtTime(Math.max(48, opts.to), t0 + opts.dur);
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(opts.vol || 0.08, t0 + 0.012);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + opts.dur);
+  osc.connect(filter); filter.connect(gain); gain.connect(ac.destination);
+  osc.start(t0); osc.stop(t0 + opts.dur + 0.03);
+}
+function sfxClick() { blip({ from: 620, to: 280, dur: 0.07, vol: 0.06, type: "sine" }); }
+function sfxPop() { blip({ from: 880, to: 180, dur: 0.12, vol: 0.07, type: "sine" }); }
+function sfxOk() {
+  blip({ from: 523, to: 560, dur: 0.09, vol: 0.07, type: "triangle" });
+  blip({ from: 784, to: 820, dur: 0.12, vol: 0.07, type: "triangle", delay: 0.09 });
+}
+function sfxWrong() { blip({ from: 240, to: 120, dur: 0.16, vol: 0.04, type: "sine", cut: 700 }); }
+function sfxKey() {
+  blip({ from: 660, to: 990, dur: 0.1, vol: 0.07, type: "sine" });
+  blip({ from: 1320, to: 990, dur: 0.14, vol: 0.05, type: "triangle", delay: 0.1 });
+}
+function sfxWin() {
+  [523, 659, 784, 1046].forEach((f, i) => blip({ from: f, to: f * 1.04, dur: 0.16, vol: 0.07, type: "triangle", delay: i * 0.11 }));
+}
+function updateMute() {
+  const btn = document.getElementById("mute");
+  btn.setAttribute("aria-pressed", muted ? "true" : "false");
+  btn.textContent = muted ? "🔇 الصوت" : "🔊 الصوت";
+}
+
+function celebrate(big) {
+  const colors = ["#c8102e", "#0d7a4f", "#fff", "#f6c445", "#38bdf8", "#fb7185"];
+  const n = big ? 42 : 14;
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement("div");
+    el.className = "confetti";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.top = "-12px";
+    el.style.background = colors[i % colors.length];
+    el.style.animationDuration = (1.3 + Math.random()) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2200);
+  }
+}
+
+function renderKeys() {
+  const box = document.getElementById("keys");
+  box.replaceChildren();
+  let n = 0;
+  state.cleared.forEach(on => {
+    const s = document.createElement("span");
+    s.textContent = "🔑";
+    if (on) { s.className = "on"; n++; }
+    box.appendChild(s);
+  });
+  document.getElementById("keycount").textContent = n + " / 5";
+}
+function stationOpen(i) {
+  if (!state.started) return false;
+  if (i === 0) return true;
+  return state.cleared[i - 1];
+}
+function renderDock() {
+  const dock = document.getElementById("dock");
+  dock.replaceChildren();
+  PLACES.forEach((p, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = state.cleared[i] ? p.short + " ✓" : (stationOpen(i) ? p.short : "🔒 " + p.short);
+    b.disabled = !stationOpen(i);
+    if (state.screen === p.id) b.setAttribute("aria-current", "true");
+    b.addEventListener("click", () => { sfxClick(); show(p.id); });
+    dock.appendChild(b);
+  });
+  const pass = document.createElement("button");
+  pass.type = "button";
+  pass.textContent = "الجواز";
+  pass.disabled = !state.cleared.every(Boolean);
+  if (state.screen === "win") pass.setAttribute("aria-current", "true");
+  pass.addEventListener("click", () => { sfxClick(); showWin(); });
+  dock.appendChild(pass);
+}
+function show(id) {
+  document.querySelectorAll("[data-screen]").forEach(el => {
+    el.hidden = el.dataset.screen !== id;
+  });
+  state.screen = id;
+  document.body.className = "theme-" + id;
+  document.getElementById("dock").hidden = id === "cover" || id === "help";
+  renderDock();
+  renderKeys();
+  window.scrollTo(0, 0);
+}
+function unlock(i) {
+  const first = !state.cleared[i];
+  state.cleared[i] = true;
+  const next = document.querySelector('[data-next="' + i + '"]');
+  if (next) {
+    next.hidden = false;
+    next.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  renderKeys();
+  renderDock();
+  if (first) {
+    sfxKey();
+    if (i < 4) celebrate(false);
+    announce("مفتاح جديد");
+  }
+}
+function showWin() {
+  show("win");
+  if (!celebratedWin) {
+    celebratedWin = true;
+    sfxWin();
+    celebrate(true);
+    announce("جواز المعرفة — إنّ وأخواتها");
+  }
+}
+
+function cycleChip(el) {
+  sfxClick();
+  el.classList.remove("good", "bad");
+  const pool = document.getElementById("pool");
+  const inn = document.getElementById("box-inna");
+  const kan = document.getElementById("box-kan");
+  if (el.parentElement === pool) inn.appendChild(el);
+  else if (el.parentElement === inn) kan.appendChild(el);
+  else pool.appendChild(el);
+}
+function wireDrop(box) {
+  box.addEventListener("dragover", e => { e.preventDefault(); box.classList.add("over"); });
+  box.addEventListener("dragleave", () => box.classList.remove("over"));
+  box.addEventListener("drop", e => {
+    e.preventDefault();
+    box.classList.remove("over");
+    const el = document.getElementById(e.dataTransfer.getData("text/plain"));
+    if (!el) return;
+    el.classList.remove("good", "bad");
+    box.appendChild(el);
+    sfxPop();
+  });
+}
+function buildS1() {
+  const pool = document.getElementById("pool");
+  document.getElementById("box-inna").replaceChildren();
+  document.getElementById("box-kan").replaceChildren();
+  pool.replaceChildren();
+  setMsg("s1-msg", "", true);
+  const fine = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+  shuffle(S1_ITEMS).forEach((it, i) => {
+    const el = document.createElement("span");
+    el.className = "chip";
+    el.id = "chip-" + i + "-" + it.g;
+    el.dataset.group = it.g;
+    el.textContent = it.t;
+    el.tabIndex = 0;
+    if (fine) el.draggable = true;
+    el.addEventListener("dragstart", e => {
+      el.dataset.dragging = "1";
+      e.dataTransfer.setData("text/plain", el.id);
+      e.dataTransfer.effectAllowed = "move";
+    });
+    el.addEventListener("dragend", () => setTimeout(() => { el.dataset.dragging = "0"; }, 60));
+    el.addEventListener("click", () => { if (el.dataset.dragging === "1") return; cycleChip(el); });
+    el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); cycleChip(el); } });
+    pool.appendChild(el);
+  });
+}
+function checkS1() {
+  const pool = document.getElementById("pool");
+  if (pool.children.length) {
+    setMsg("s1-msg", "ضع كل البطاقات أولًا.", false);
+    sfxWrong();
+    return;
+  }
+  let ok = 0;
+  document.querySelectorAll("#box-inna .chip, #box-kan .chip").forEach(ch => {
+    const good = ch.dataset.group === ch.parentElement.dataset.accept;
+    ch.classList.toggle("good", good);
+    ch.classList.toggle("bad", !good);
+    if (good) ok++;
+  });
+  if (ok === S1_ITEMS.length) {
+    setMsg("s1-msg", "أحسنت! أخوات إنّ: إنّ، أنّ، كأنّ، لكنّ، ليت، لعلّ.", true);
+    unlock(0);
+  } else {
+    setMsg("s1-msg", "الصحيح " + ok + " من " + S1_ITEMS.length + ". البطاقة الحمراء تحتاج صندوقًا آخر.", false);
+    sfxWrong();
+  }
+}
+
+function paintSentence(text, fill) {
+  const p = document.getElementById("s2-sentence");
+  const parts = text.split("……");
+  p.replaceChildren();
+  p.append(document.createTextNode(parts[0]));
+  const blank = document.createElement("span");
+  blank.className = "blank";
+  blank.textContent = fill || "……";
+  p.append(blank);
+  if (parts[1]) p.append(document.createTextNode(parts[1]));
+}
+function renderS2() {
+  const q = S2[s2Index];
+  document.getElementById("s2-count").textContent = (s2Index + 1) + " / " + S2.length;
+  paintSentence(q.text, "");
+  setMsg("s2-msg", "", true);
+  const box = document.getElementById("s2-choices");
+  box.replaceChildren();
+  shuffle(SISTERS).forEach(word => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = word;
+    b.addEventListener("click", () => pickS2(word, b));
+    box.appendChild(b);
+  });
+  s2Lock = false;
+}
+function pickS2(word, btn) {
+  if (s2Lock) return;
+  const q = S2[s2Index];
+  if (word === q.answer) {
+    s2Lock = true;
+    btn.classList.add("correct");
+    paintSentence(q.text, word);
+    document.getElementById("s2-choices").querySelectorAll("button").forEach(b => { b.disabled = true; });
+    setMsg("s2-msg", "أحسنت!", true);
+    sfxOk();
+    setTimeout(() => {
+      if (s2Index < S2.length - 1) { s2Index++; renderS2(); }
+      else unlock(1);
+    }, 620);
+  } else {
+    btn.classList.add("wrong");
+    setMsg("s2-msg", q.hint, false);
+    sfxWrong();
+    setTimeout(() => btn.classList.remove("wrong"), 420);
+  }
+}
+
+function renderS3() {
+  const q = S3[s3Index];
+  document.getElementById("s3-count").textContent = (s3Index + 1) + " / " + S3.length;
+  setMsg("s3-msg", "", true);
+  const box = document.getElementById("s3-opts");
+  box.replaceChildren();
+  shuffle([{ t: q.correct, ok: true }, { t: q.wrong, ok: false }]).forEach(o => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "sent";
+    b.textContent = o.t;
+    b.dataset.ok = o.ok ? "1" : "0";
+    b.addEventListener("click", () => pickS3(b, o.ok));
+    box.appendChild(b);
+  });
+  s3Lock = false;
+}
+function pickS3(btn, ok) {
+  if (s3Lock) return;
+  if (ok) {
+    s3Lock = true;
+    btn.classList.add("correct");
+    setMsg("s3-msg", "أحسنت! الاسم منصوب والخبر مرفوع.", true);
+    sfxOk();
+    setTimeout(() => {
+      if (s3Index < S3.length - 1) { s3Index++; renderS3(); }
+      else unlock(2);
+    }, 620);
+  } else {
+    btn.classList.add("wrong");
+    setMsg("s3-msg", "هذه الحركة مقلوبة. اختر الجملة الأخرى.", false);
+    sfxWrong();
+    setTimeout(() => btn.classList.remove("wrong"), 450);
+  }
+}
+
+function renderS4() {
+  const q = S4[s4Index];
+  document.getElementById("s4-count").textContent = (s4Index + 1) + " / " + S4.length;
+  setMsg("s4-msg", "", true);
+  const line = document.getElementById("s4-line");
+  line.replaceChildren();
+  q.chunks.forEach(ch => {
+    if (ch.right) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "word";
+      b.textContent = ch.wrong;
+      b.dataset.right = ch.right;
+      b.dataset.wrong = ch.wrong;
+      b.addEventListener("click", () => {
+        sfxPop();
+        const fixed = b.textContent === ch.right;
+        b.textContent = fixed ? ch.wrong : ch.right;
+        b.classList.toggle("fixed", !fixed);
+      });
+      line.appendChild(b);
+    } else {
+      line.append(document.createTextNode(ch.text));
+    }
+  });
+}
+function checkS4() {
+  const words = [...document.querySelectorAll("#s4-line .word")];
+  const all = words.length > 0 && words.every(w => w.textContent === w.dataset.right);
+  if (!all) {
+    setMsg("s4-msg", S4[s4Index].hint, false);
+    sfxWrong();
+    return;
+  }
+  setMsg("s4-msg", "أحسنت!", true);
+  sfxOk();
+  if (s4Index < S4.length - 1) setTimeout(() => { s4Index++; renderS4(); }, 500);
+  else unlock(3);
+}
+
+function renderS5() {
+  const box = document.getElementById("quiz");
+  box.replaceChildren();
+  S5.forEach((qu, i) => {
+    const wrap = document.createElement("div");
+    wrap.className = "q";
+    const p = document.createElement("p");
+    p.textContent = (i + 1) + ") " + qu.q;
+    wrap.appendChild(p);
+    const opts = document.createElement("div");
+    opts.className = "opts";
+    qu.opts.forEach((o, j) => {
+      const lab = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "s5q" + i;
+      input.value = String(j);
+      input.addEventListener("change", () => sfxClick());
+      lab.appendChild(input);
+      lab.append(document.createTextNode(" " + o));
+      opts.appendChild(lab);
+    });
+    wrap.appendChild(opts);
+    box.appendChild(wrap);
+  });
+  setMsg("s5-msg", "", true);
+  document.getElementById("retry-s5").hidden = true;
+  if (!state.cleared[4]) document.querySelector('[data-next="4"]').hidden = true;
+}
+function gradeS5() {
+  const picked = S5.map((qu, i) => document.querySelector('input[name="s5q' + i + '"]:checked'));
+  if (picked.some(input => !input)) {
+    setMsg("s5-msg", "أجب عن الأسئلة كلها، ثم اضغط تحقق.", false);
+    sfxWrong();
+    return;
+  }
+  let score = 0;
+  S5.forEach((qu, i) => {
+    const chosen = picked[i];
+    const labels = document.getElementById("quiz").children[i].querySelectorAll("label");
+    labels.forEach(l => l.classList.remove("correct", "wrong"));
+    const v = +chosen.value;
+    if (v === qu.a) { score++; chosen.parentElement.classList.add("correct"); }
+    else { chosen.parentElement.classList.add("wrong"); labels[qu.a].classList.add("correct"); }
+  });
+  const pass = score >= 4;
+  setMsg("s5-msg", pass
+    ? "النتيجة: " + score + "/5. " + (score === 5 ? "ممتاز!" : "جيد، يمكن المتابعة.")
+    : "النتيجة: " + score + "/5. المطلوب 4 من 5 على الأقل.", pass);
+  if (pass) {
+    sfxOk();
+    unlock(4);
+    document.getElementById("retry-s5").hidden = true;
+  } else {
+    sfxWrong();
+    document.getElementById("retry-s5").hidden = false;
+    if (state.cleared[4]) document.querySelector('[data-next="4"]').hidden = false;
+  }
+}
+
+function resetAll() {
+  state.started = false;
+  state.cleared = [false, false, false, false, false];
+  s2Index = 0; s3Index = 0; s4Index = 0;
+  s2Lock = false; s3Lock = false;
+  celebratedWin = false;
+  document.querySelectorAll("[data-next]").forEach(b => { b.hidden = true; });
+  buildS1();
+  renderS2();
+  renderS3();
+  renderS4();
+  renderS5();
+  show("cover");
+}
+
+document.getElementById("mute").addEventListener("click", () => {
+  ensureAudio();
+  muted = !muted;
+  updateMute();
+  if (!muted) sfxClick();
+});
+document.getElementById("start").addEventListener("click", () => { ensureAudio(); sfxClick(); show("help"); });
+document.getElementById("go-s1").addEventListener("click", () => {
+  ensureAudio(); sfxOk(); state.started = true; show("s1");
+});
+document.getElementById("check-s1").addEventListener("click", checkS1);
+document.getElementById("check-s4").addEventListener("click", checkS4);
+document.getElementById("check-s5").addEventListener("click", gradeS5);
+document.getElementById("retry-s5").addEventListener("click", () => { sfxClick(); renderS5(); });
+document.querySelector('[data-next="0"]').addEventListener("click", () => { sfxClick(); show("s2"); });
+document.querySelector('[data-next="1"]').addEventListener("click", () => { sfxClick(); show("s3"); });
+document.querySelector('[data-next="2"]').addEventListener("click", () => { sfxClick(); show("s4"); });
+document.querySelector('[data-next="3"]').addEventListener("click", () => { sfxClick(); show("s5"); });
+document.querySelector('[data-next="4"]').addEventListener("click", () => { sfxClick(); showWin(); });
+document.getElementById("replay").addEventListener("click", () => { sfxClick(); resetAll(); });
+wireDrop(document.getElementById("box-inna"));
+wireDrop(document.getElementById("box-kan"));
+wireDrop(document.getElementById("pool"));
+
+const decor = document.getElementById("decor");
+["☁️", "🌴", "⭐", "☁️"].forEach((emo, i) => {
+  const el = document.createElement("i");
+  el.textContent = emo;
+  el.style.top = (8 + i * 18) + "%";
+  el.style.left = (6 + i * 22) + "%";
+  el.style.animationDuration = (4 + i) + "s";
+  decor.appendChild(el);
+});
+
+buildS1();
+renderS2();
+renderS3();
+renderS4();
+renderS5();
+renderKeys();
+updateMute();
+show("cover");
+</script>
+</body>
+</html>
