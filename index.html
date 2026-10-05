@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>كان وأخواتها — مغامرة النحو ⭐</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+  :root {
+    --sky: #7dd3fc;
+    --pink: #f9a8d4;
+    --yellow: #fde047;
+    --green: #86efac;
+    --orange: #fdba74;
+    --purple: #c4b5fd;
+    --ink: #1e1b4b;
+    --card: #ffffffee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Cairo", Tahoma, sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    background: linear-gradient(180deg, #bae6fd 0%, #fce7f3 40%, #fef9c3 100%);
+    overflow-x: hidden;
+  }
+  .clouds { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50px;
+    opacity: 0.85;
+    animation: float linear infinite;
+    filter: drop-shadow(0 4px 8px #0001);
+  }
+  .cloud::before, .cloud::after {
+    content: "";
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .cloud::before { width: 50%; height: 100%; top: -40%; left: 10%; }
+  .cloud::after { width: 60%; height: 120%; top: -50%; right: 10%; }
+  @keyframes float {
+    from { transform: translateX(110vw); }
+    to { transform: translateX(-30vw); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+  @keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    80% { transform: scale(1.08); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes spin-slow {
+    from { transform: rotate(0); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes star-twinkle {
+    0%, 100% { opacity: 0.4; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 1rem; }
+  header {
+    text-align: center;
+    padding: 1.2rem 0.5rem 0.5rem;
+  }
+  .mascot {
+    font-size: 3.2rem;
+    display: inline-block;
+    animation: bounce 1.4s ease-in-out infinite;
+  }
+  header h1 {
+    margin: 0.3rem 0;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #7c3aed, #db2777, #ea580c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header p { margin: 0; font-weight: 700; color: #5b21b6; }
+  nav {
+    display: flex; flex-wrap: wrap; gap: 0.45rem; justify-content: center;
+    padding: 0.8rem 0 0.4rem;
+  }
+  nav button {
+    border: none;
+    border-radius: 999px;
+    padding: 0.55rem 1rem;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.92rem;
+    cursor: pointer;
+    background: #fff;
+    color: #5b21b6;
+    box-shadow: 0 4px 0 #c4b5fd;
+    transition: transform 0.15s;
+  }
+  nav button:active { transform: translateY(3px); box-shadow: 0 1px 0 #c4b5fd; }
+  nav button.active {
+    background: linear-gradient(135deg, #a78bfa, #f472b6);
+    color: #fff;
+    box-shadow: 0 4px 0 #7c3aed;
+  }
+  section { display: none; animation: pop 0.35s ease; }
+  section.show { display: block; }
+  .card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 1.2rem 1.3rem;
+    margin: 0.7rem 0;
+    border: 3px solid #fff;
+    box-shadow: 0 10px 0 #f9a8d4aa, 0 16px 30px #0001;
+  }
+  .card h2 {
+    margin: 0 0 0.6rem;
+    font-size: 1.25rem;
+    color: #7c3aed;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .verbs {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.6rem;
+  }
+  .verbs span {
+    background: linear-gradient(145deg, var(--yellow), var(--orange));
+    color: var(--ink);
+    padding: 0.45rem 0.9rem;
+    border-radius: 16px;
+    font-weight: 900;
+    box-shadow: 0 4px 0 #f59e0b;
+    animation: wiggle 2.5s ease-in-out infinite;
+  }
+  .verbs span:nth-child(odd) { animation-delay: 0.3s; }
+  .verbs span:nth-child(3n) { background: linear-gradient(145deg, var(--green), #34d399); box-shadow: 0 4px 0 #059669; }
+  .verbs span:nth-child(4n) { background: linear-gradient(145deg, var(--pink), #fb7185); box-shadow: 0 4px 0 #db2777; }
+  .ex {
+    background: #faf5ff;
+    border: 2px dashed #c4b5fd;
+    border-radius: 16px;
+    padding: 0.75rem 1rem;
+    margin: 0.55rem 0;
+    font-weight: 700;
+  }
+  .ex mark {
+    background: var(--yellow);
+    border-radius: 6px;
+    padding: 0 0.25rem;
+  }
+  table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    overflow: hidden; border-radius: 16px; font-size: 0.92rem;
+  }
+  th, td { padding: 0.55rem; text-align: center; border: 2px solid #e9d5ff; }
+  th { background: linear-gradient(90deg, #a78bfa, #f9a8d4); color: #fff; }
+  tr:nth-child(even) td { background: #fdf4ff; }
+  .stars { text-align: center; font-size: 1.4rem; letter-spacing: 0.2rem; }
+  .star-anim { display: inline-block; animation: star-twinkle 1.2s infinite; }
+  .star-anim:nth-child(2) { animation-delay: 0.2s; }
+  .star-anim:nth-child(3) { animation-delay: 0.4s; }
+  .drop {
+    min-height: 70px;
+    background: #fff;
+    border: 3px dashed #a78bfa;
+    border-radius: 18px;
+    padding: 0.5rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .drop.over { background: #ede9fe; transform: scale(1.02); }
+  .label-box {
+    font-weight: 900; color: #7c3aed; margin-bottom: 0.25rem;
+    display: flex; align-items: center; gap: 0.3rem;
+  }
+  .chip {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 14px;
+    cursor: grab;
+    font-weight: 800;
+    box-shadow: 0 3px 0 #4f46e5;
+    user-select: none;
+    animation: pop 0.4s ease;
+  }
+  .pool { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.7rem; min-height: 48px; }
+  .btn {
+    border: none;
+    border-radius: 18px;
+    padding: 0.7rem 1.4rem;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    background: linear-gradient(135deg, #22c55e, #4ade80);
+    color: #14532d;
+    box-shadow: 0 5px 0 #15803d;
+    margin: 0.3rem 0.2rem;
+  }
+  .btn.secondary { background: linear-gradient(135deg, #fb923c, #fbbf24); color: #7c2d12; box-shadow: 0 5px 0 #c2410c; }
+  .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #15803d; }
+  .q { margin-bottom: 1rem; background: #fff; border-radius: 18px; padding: 0.9rem; border: 2px solid #fbcfe8; }
+  .q p { margin: 0 0 0.5rem; font-weight: 900; }
+  .opts label {
+    display: block;
+    background: #fdf4ff;
+    padding: 0.55rem 0.8rem;
+    border-radius: 14px;
+    border: 2px solid #e9d5ff;
+    margin: 0.35rem 0;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.15s;
+  }
+  .opts label:hover { transform: scale(1.02); border-color: #c084fc; }
+  .opts label.correct { background: #dcfce7; border-color: #22c55e; }
+  .opts label.wrong { background: #fee2e2; border-color: #ef4444; }
+  #score, #sortMsg {
+    text-align: center; font-size: 1.2rem; font-weight: 900; margin-top: 0.8rem;
+    min-height: 1.5em;
+  }
+  .confetti {
+    position: fixed; pointer-events: none; z-index: 99;
+    width: 12px; height: 12px; border-radius: 2px;
+    animation: fall 2s linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+  .balloon {
+    position: fixed; bottom: -40px; font-size: 2rem;
+    animation: rise 4s ease-in forwards;
+    z-index: 50; pointer-events: none;
+  }
+  @keyframes rise {
+    to { transform: translateY(-110vh) rotate(20deg); opacity: 0.2; }
+  }
+  .sparkle {
+    position: absolute; font-size: 1.2rem;
+    animation: spin-slow 6s linear infinite, star-twinkle 1.5s infinite;
+  }
+  footer {
+    text-align: center; padding: 1rem; color: #6b21a8; font-weight: 700; font-size: 0.85rem;
+  }
+  .progress {
+    height: 14px; background: #fff; border-radius: 999px; overflow: hidden;
+    border: 2px solid #c4b5fd; margin: 0.5rem auto 0; max-width: 280px;
+  }
+  .progress > i {
+    display: block; height: 100%; width: 0%;
+    background: linear-gradient(90deg, #f472b6, #a78bfa, #38bdf8);
+    transition: width 0.4s;
+  }
+</style>
+</head>
+<body>
+<div class="clouds" id="clouds"></div>
+<div class="wrap">
+  <header>
+    <div class="mascot">🦉✨</div>
+    <h1>مغامرة كان وأخواتها</h1>
+    <p>صف ٥ · لغتي الجميلة · علوم واكتشافات</p>
+    <div class="stars"><span class="star-anim">⭐</span><span class="star-anim">⭐</span><span class="star-anim">⭐</span></div>
+    <div class="progress"><i id="prog"></i></div>
+  </header>
+  <nav>
+    <button type="button" class="active" data-tab="intro">🚀 الفكرة</button>
+    <button type="button" data-tab="family">👨‍👩‍👧‍👦 الأخوات</button>
+    <button type="button" data-tab="compare">⚔️ ضد إنّ</button>
+    <button type="button" data-tab="sort">🎯 صِنّف</button>
+    <button type="button" data-tab="build">🧩 ركّب</button>
+    <button type="button" data-tab="quiz">🏆 اختبار</button>
+  </nav>
+
+  <section id="intro" class="show">
+    <div class="card">
+      <h2>🎪 ماذا نتعلم؟</h2>
+      <p style="font-weight:700">كان وأخواتها أفعال <mark style="background:#fde047;padding:0 .2rem;border-radius:6px">ناسخة ناقصة</mark> تدخل على الجملة الاسمية فـ:</p>
+      <ul style="font-weight:800">
+        <li>ترفع المبتدأ ← <span style="color:#7c3aed">اسمها</span> 🎈</li>
+        <li>تنصب الخبر ← <span style="color:#db2777">خبرها</span> 🎁</li>
+      </ul>
+      <div class="ex">قبل: الطالبُ <mark>مجتهدٌ</mark> (مبتدأ وخبر مرفوعان)<br>بعد: كان الطالبُ <mark>مجتهدًا</mark> ← الخبر صار منصوبًا</div>
+    </div>
+  </section>
+
+  <section id="family">
+    <div class="card">
+      <h2>🌈 عائلة كان</h2>
+      <p style="font-weight:700;text-align:center">اضغطوا على كل فعل ليظهر مثال متحرك!</p>
+      <div class="verbs" id="verbBtns">
+        <span data-ex="كان الجوُّ جميلًا">كان</span>
+        <span data-ex="أصبح الولدُ سعيدًا">أصبح</span>
+        <span data-ex="أضحى الطائرُ مغرّدًا">أضحى</span>
+        <span data-ex="أمسى البيتُ هادئًا">أمسى</span>
+        <span data-ex="ظل المطرُ هاطلًا">ظل</span>
+        <span data-ex="بات الحارسُ مستيقظًا">بات</span>
+        <span data-ex="صار الحلمُ حقيقةً">صار</span>
+        <span data-ex="ليس البابُ مغلقًا">ليس</span>
+      </div>
+      <div class="ex" id="verbEx" style="text-align:center;font-size:1.15rem;min-height:3em">اضغط فعلًا 👆</div>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="card">
+      <h2>⚔️ معركة النحو!</h2>
+      <p style="font-weight:700">كان وإنّ يعملان <strong>بالعكس</strong> — احفظوا الجدول:</p>
+      <table>
+        <tr><th></th><th>كان 🐯</th><th>إنّ 🦄</th></tr>
+        <tr><td>النوع</td><td>فعل ناسخ</td><td>حرف ناسخ</td></tr>
+        <tr><td>الاسم</td><td>يرفع ⬆️</td><td>ينصب ⬇️</td></tr>
+        <tr><td>الخبر</td><td>ينصب ⬇️</td><td>يرفع ⬆️</td></tr>
+        <tr><td>مثال</td><td>كان الجوُّ حارًّا</td><td>إنّ الجوَّ حارٌّ</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="sort">
+    <div class="card">
+      <h2>🎯 صنّف الجمل</h2>
+      <p style="font-weight:700">اسحب البطاقة إلى الصندوق الصحيح</p>
+      <div class="label-box">🐯 كان وأخواتها</div>
+      <div class="drop" id="box-kan" data-accept="kan"></div>
+      <div class="label-box" style="margin-top:0.7rem">🦄 إنّ وأخواتها</div>
+      <div class="drop" id="box-inna" data-accept="inna"></div>
+      <div class="pool" id="pool"></div>
+      <div style="text-align:center;margin-top:0.8rem">
+        <button class="btn" type="button" id="checkSort">تحقق ✨</button>
+        <button class="btn secondary" type="button" id="resetSort">إعادة 🔄</button>
+      </div>
+      <div id="sortMsg"></div>
+    </div>
+  </section>
+
+  <section id="build">
+    <div class="card">
+      <h2>🧩 ركّب جملة كان</h2>
+      <p style="font-weight:700">اختر فعلًا + اسمًا + خبرًا لتبني جملة صحيحة</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:0.6rem 0">
+        <select id="selVerb" style="padding:0.5rem;border-radius:12px;border:2px solid #c4b5fd;font-family:inherit;font-weight:800">
+          <option value="كان">كان / كانت</option>
+          <option value="أصبح">أصبح / أصبحت</option>
+          <option value="صار">صار / صارت</option>
+          <option value="ليس">ليس / ليست</option>
+          <option value="ظل">ظل / ظلت</option>
+        </select>
+        <select id="selName" style="padding:0.5rem;border-radius:12px;border:2px solid #c4b5fd;font-family:inherit;font-weight:800">
+          <option value="الطالبُ|m|مجتهدًا">الطالبُ</option>
+          <option value="الولدُ|m|سعيدًا">الولدُ</option>
+          <option value="السماءُ|f|صافيةً">السماءُ</option>
+          <option value="الحديقةُ|f|جميلةً">الحديقةُ</option>
+        </select>
+        <select id="selPred" style="padding:0.5rem;border-radius:12px;border:2px solid #c4b5fd;font-family:inherit;font-weight:800">
+        </select>
+      </div>
+      <div class="ex" id="built" style="text-align:center;font-size:1.2rem;font-weight:900"></div>
+      <div style="text-align:center"><button class="btn" type="button" id="buildBtn">اعرض الجملة 🎉</button></div>
+      <p id="buildHint" style="text-align:center;font-weight:800;color:#7c3aed"></p>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <div class="card">
+      <h2>🏆 اختبار النجوم</h2>
+      <div id="quizBox"></div>
+      <div style="text-align:center">
+        <button class="btn" type="button" id="submitQuiz">احسب نجومي ⭐</button>
+      </div>
+      <div id="score"></div>
+    </div>
+  </section>
+</div>
+<footer>للمعلمة · صف ٥ عمان · راجعي الدقة قبل العرض</footer>
+<script>
+// ---- No audio (iPhone-friendly silent build) ----
+function sfxClick() {}
+function sfxPop() {}
+function sfxOk() {}
+function sfxWrong() {}
+function sfxWin() {}
+function speak() {}
+
+// clouds
+const clouds = document.getElementById("clouds");
+for (let i = 0; i < 6; i++) {
+  const c = document.createElement("div");
+  c.className = "cloud";
+  const w = 80 + Math.random() * 100;
+  c.style.width = w + "px";
+  c.style.height = (w * 0.35) + "px";
+  c.style.top = (5 + Math.random() * 55) + "%";
+  c.style.animationDuration = (25 + Math.random() * 30) + "s";
+  c.style.animationDelay = (-Math.random() * 40) + "s";
+  clouds.appendChild(c);
+}
+
+const tabs = [...document.querySelectorAll("nav button")];
+const sections = [...document.querySelectorAll("section")];
+const prog = document.getElementById("prog");
+const visited = new Set(["intro"]);
+function updateProg() { prog.style.width = (visited.size / tabs.length * 100) + "%"; }
+tabs.forEach(btn => btn.addEventListener("click", () => {
+  sfxClick();
+  tabs.forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  sections.forEach(s => s.classList.toggle("show", s.id === btn.dataset.tab));
+  visited.add(btn.dataset.tab);
+  updateProg();
+}));
+updateProg();
+
+document.querySelectorAll("#verbBtns span").forEach(sp => {
+  sp.style.cursor = "pointer";
+  sp.onclick = () => {
+    sfxPop();
+    const box = document.getElementById("verbEx");
+    box.style.animation = "none";
+    box.offsetHeight;
+    box.style.animation = "pop 0.4s ease";
+    box.textContent = "✨ " + sp.dataset.ex;
+    speak(sp.dataset.ex);
+  };
+});
+
+const items = [
+  { t: "كان الطالبُ نشيطًا", k: "kan" },
+  { t: "إنّ العلمَ نورٌ", k: "inna" },
+  { t: "أصبح الجوُّ باردًا", k: "kan" },
+  { t: "ليت النجاحَ قريبٌ", k: "inna" },
+  { t: "ليس البابُ مفتوحًا", k: "kan" },
+  { t: "كأنّ القمرَ مصباحٌ", k: "inna" },
+  { t: "صار الحلمُ جميلًا", k: "kan" },
+  { t: "لعلّ الفرجَ قريبٌ", k: "inna" }
+];
+function buildPool() {
+  const pool = document.getElementById("pool");
+  const kan = document.getElementById("box-kan");
+  const inna = document.getElementById("box-inna");
+  kan.innerHTML = ""; inna.innerHTML = ""; pool.innerHTML = "";
+  document.getElementById("sortMsg").textContent = "";
+  [...items].sort(() => Math.random() - 0.5).forEach((it, i) => {
+    const el = document.createElement("span");
+    el.className = "chip";
+    el.draggable = true;
+    el.textContent = it.t;
+    el.dataset.key = it.k;
+    el.id = "chip" + i;
+    el.addEventListener("dragstart", e => e.dataTransfer.setData("text/plain", el.id));
+    el.addEventListener("click", () => {
+      sfxClick();
+      if (el.parentElement === pool) kan.appendChild(el);
+      else if (el.parentElement === kan) inna.appendChild(el);
+      else pool.appendChild(el);
+    });
+    pool.appendChild(el);
+  });
+}
+function wireDrop(box) {
+  box.addEventListener("dragover", e => { e.preventDefault(); box.classList.add("over"); });
+  box.addEventListener("dragleave", () => box.classList.remove("over"));
+  box.addEventListener("drop", e => {
+    e.preventDefault();
+    box.classList.remove("over");
+    const el = document.getElementById(e.dataTransfer.getData("text/plain"));
+    if (el) { box.appendChild(el); sfxPop(); }
+  });
+}
+wireDrop(document.getElementById("box-kan"));
+wireDrop(document.getElementById("box-inna"));
+wireDrop(document.getElementById("pool"));
+document.getElementById("checkSort").onclick = () => {
+  let ok = 0;
+  document.querySelectorAll("#box-kan .chip, #box-inna .chip").forEach(ch => {
+    if (ch.dataset.key === ch.parentElement.dataset.accept) ok++;
+  });
+  const left = document.getElementById("pool").children.length;
+  const msg = document.getElementById("sortMsg");
+  if (left) { msg.textContent = "🎒 ضع كل البطاقات أولًا!"; sfxWrong(); speak("ضع كل البطاقات أولًا"); }
+  else if (ok === items.length) { msg.textContent = "🎉 بطل النحو! كلها صح"; sfxWin(); speak("أحسنت! بطل النحو"); celebrate(); }
+  else { msg.textContent = `⭐ صحّحتَ ${ok} من ${items.length}`; sfxOk(); speak(`صححت ${ok} من ${items.length}`); }
+};
+document.getElementById("resetSort").onclick = () => { sfxClick(); buildPool(); };
+buildPool();
+
+const verbForms = {
+  "كان": { m: "كان", f: "كانت" },
+  "أصبح": { m: "أصبح", f: "أصبحت" },
+  "صار": { m: "صار", f: "صارت" },
+  "ليس": { m: "ليس", f: "ليست" },
+  "ظل": { m: "ظل", f: "ظلت" }
+};
+const predByGender = {
+  m: ["مجتهدًا", "سعيدًا", "نشيطًا"],
+  f: ["صافيةً", "جميلةً", "واسعةً"]
+};
+const selName = document.getElementById("selName");
+const selPred = document.getElementById("selPred");
+const selVerb = document.getElementById("selVerb");
+function parseName() {
+  const [name, g, defPred] = selName.value.split("|");
+  return { name, g, defPred };
+}
+function fillPreds() {
+  const { g, defPred } = parseName();
+  const list = predByGender[g] || predByGender.m;
+  selPred.innerHTML = "";
+  list.forEach(p => {
+    const o = document.createElement("option");
+    o.value = p; o.textContent = p;
+    if (p === defPred) o.selected = true;
+    selPred.appendChild(o);
+  });
+}
+selName.onchange = fillPreds;
+fillPreds();
+document.getElementById("buildBtn").onclick = () => {
+  const { name, g } = parseName();
+  const root = selVerb.value;
+  const v = (verbForms[root] || { m: root, f: root })[g];
+  const p = selPred.value;
+  const sentence = `${v} ${name} ${p}.`;
+  document.getElementById("built").textContent = sentence;
+  document.getElementById("buildHint").textContent =
+    g === "f"
+      ? `مع الاسم المؤنث نقول «${v}» · الاسم مرفوع · الخبر منصوب (${p})`
+      : `مع الاسم المذكر نقول «${v}» · الاسم مرفوع · الخبر منصوب (${p})`;
+  sfxOk();
+  speak(sentence);
+  celebrate(false);
+};
+
+const questions = [
+  { q: "كان وأخواتها تدخل على:", opts: ["الجملة الفعلية", "الجملة الاسمية", "شبه الجملة فقط"], a: 1 },
+  { q: "عمل كان وأخواتها:", opts: ["ترفع الاسم وتنصب الخبر", "تنصب الاسم وترفع الخبر", "تجرّ الاسم والخبر"], a: 0 },
+  { q: "أي فعل من أخوات كان؟", opts: ["ليت", "صار", "كأنّ"], a: 1 },
+  { q: "في: أصبح الولدُ مشغولًا — خبر أصبح:", opts: ["الولدُ", "مشغولًا", "أصبح"], a: 1 },
+  { q: "إنّ تعمل عكس كان لأنها:", opts: ["تنصب الاسم وترفع الخبر", "ترفع الاسم وتنصب الخبر", "لا تغيّر الإعراب"], a: 0 },
+  { q: "«ليس» من أخوات كان لأنها:", opts: ["حرف ناسخ", "فعل ناسخ ناقص", "اسم إشارة"], a: 1 },
+  { q: "كان الامتحانُ سهلًا — اسم كان:", opts: ["سهلًا", "الامتحانُ", "كان"], a: 1 },
+  { q: "أي جملة لـ إنّ؟", opts: ["صار الجوُّ لطيفًا", "إنّ الجوَّ لطيفٌ", "ظل الجوُّ لطيفًا"], a: 1 }
+];
+const quizBox = document.getElementById("quizBox");
+questions.forEach((qu, i) => {
+  const div = document.createElement("div");
+  div.className = "q";
+  div.innerHTML = `<p>${i + 1}) ${qu.q}</p><div class="opts"></div>`;
+  const opts = div.querySelector(".opts");
+  qu.opts.forEach((o, j) => {
+    const lab = document.createElement("label");
+    lab.innerHTML = `<input type="radio" name="q${i}" value="${j}" /> ${o}`;
+    lab.addEventListener("click", () => sfxClick());
+    opts.appendChild(lab);
+  });
+  quizBox.appendChild(div);
+});
+document.getElementById("submitQuiz").onclick = () => {
+  let score = 0;
+  questions.forEach((qu, i) => {
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const labels = quizBox.children[i].querySelectorAll("label");
+    labels.forEach(l => l.classList.remove("correct", "wrong"));
+    if (chosen) {
+      const v = +chosen.value;
+      if (v === qu.a) { score++; chosen.parentElement.classList.add("correct"); }
+      else { chosen.parentElement.classList.add("wrong"); labels[qu.a].classList.add("correct"); }
+    } else labels[qu.a].classList.add("correct");
+  });
+  const stars = "⭐".repeat(Math.max(1, Math.round(score / questions.length * 5)));
+  document.getElementById("score").textContent = `النتيجة: ${score}/${questions.length}  ${stars}`;
+  if (score >= 6) {
+    sfxWin();
+    speak(`ممتاز! حصلت على ${score} من ${questions.length}`);
+    celebrate(true);
+  } else if (score >= 4) {
+    sfxOk();
+    speak(`جيد! حصلت على ${score} من ${questions.length}`);
+  } else {
+    sfxWrong();
+    speak(`حاول مرة أخرى. النتيجة ${score} من ${questions.length}`);
+  }
+};
+
+function celebrate(big) {
+  const colors = ["#f472b6", "#a78bfa", "#38bdf8", "#fde047", "#4ade80", "#fb923c"];
+  for (let i = 0; i < (big ? 40 : 12); i++) {
+    const el = document.createElement("div");
+    el.className = "confetti";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.top = "-10px";
+    el.style.background = colors[i % colors.length];
+    el.style.animationDuration = (1.5 + Math.random()) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2200);
+  }
+  if (big) {
+    ["🎈", "🎉", "🌟", "🎈"].forEach((e, i) => {
+      const b = document.createElement("div");
+      b.className = "balloon";
+      b.textContent = e;
+      b.style.left = (20 + i * 20) + "vw";
+      b.style.animationDelay = (i * 0.15) + "s";
+      document.body.appendChild(b);
+      setTimeout(() => b.remove(), 4200);
+    });
+  }
+}
+
+// soft welcome after first interaction already unlocks audio
+</script>
+</body>
+</html>
