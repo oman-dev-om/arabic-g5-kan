@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#f3ecdf" />
+<meta name="color-scheme" content="light" />
+<title>الجملة الاسمية — الصف الخامس</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23f4c7b4'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23f6d56a'/%3E%3C/svg%3E" />
+<style>
+  @font-face {
+    font-family: "Noto Naskh Arabic";
+    src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Noto Naskh Arabic";
+    src: local("Noto Naskh Arabic Bold");
+    font-weight: 700;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Noto Kufi Arabic";
+    src: local("Noto Kufi Arabic"), local("Noto Kufi Arabic Regular");
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Noto Kufi Arabic";
+    src: local("Noto Kufi Arabic Bold");
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  :root {
+    --paper: #fffdf9;
+    --desk: #f3ecdf;
+    --ink: #3c2c28;
+    --muted: #8d7368;
+    --rose: #8d3d4a;
+    --terra: #c4624e;
+    --terra-d: #a34e3c;
+    --gold: #c9922e;
+    --gold-s: #f8e7c0;
+    --sage: #6f8f52;
+    --sage-s: #e7f0d8;
+    --blue: #4d7fa8;
+    --line: #eadfce;
+    --shadow: 0 14px 36px rgba(92, 58, 36, 0.08);
+    --naskh: "Noto Naskh Arabic", "Geeza Pro", "Traditional Arabic", Tahoma, serif;
+    --kufi: "Noto Kufi Arabic", "Noto Naskh Arabic", "Geeza Pro", Tahoma, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    color: var(--ink);
+    font-family: var(--naskh);
+    background:
+      radial-gradient(900px 420px at 8% -10%, #fde6d4 0%, transparent 55%),
+      radial-gradient(700px 380px at 110% 100%, #e5f0dc 0%, transparent 50%),
+      var(--desk);
+    overflow-x: hidden;
+  }
+  button, input { font-family: inherit; }
+  button { touch-action: manipulation; }
+  [hidden] { display: none !important; }
+
+  .app {
+    width: min(480px, 100%);
+    margin: 0 auto;
+    min-height: 100dvh;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      14px
+      max(16px, env(safe-area-inset-bottom));
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    margin-bottom: 6px;
+  }
+  .back {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--rose);
+    font-family: var(--kufi);
+    font-weight: 700;
+    font-size: 0.95rem;
+    min-height: 44px;
+    padding: 0 4px;
+    cursor: pointer;
+  }
+  .mute {
+    margin-inline-start: auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--rose);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(196, 98, 78, 0.08);
+  }
+  .mute svg { width: 22px; height: 22px; display: block; }
+  .mute .ico-off { display: none; }
+  .mute[aria-pressed="true"] .ico-on { display: none; }
+  .mute[aria-pressed="true"] .ico-off { display: block; }
+  .dots { display: flex; gap: 6px; align-items: center; }
+  .dots i {
+    width: 7px;
+    height: 7px;
+    border-radius: 99px;
+    background: #e3d4c4;
+    display: block;
+  }
+  .dots i.now { width: 18px; background: var(--terra); }
+  .dots i.done { background: #e0b197; }
+
+  .sheet {
+    background: var(--paper);
+    border: 1px solid #f0e4d4;
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: 20px 16px 16px;
+    animation: rise .38s ease;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .kicker {
+    margin: 0 0 8px;
+    text-align: center;
+    color: var(--terra);
+    font-family: var(--kufi);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  .ex {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+  .ex-num {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #f8ebe4;
+    color: var(--rose);
+    font-family: var(--kufi);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .ex p {
+    margin: 2px 0 0;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--rose);
+    font-weight: 700;
+  }
+
+  .btn {
+    appearance: none;
+    width: 100%;
+    min-height: 54px;
+    border: 0;
+    border-radius: 16px;
+    background: var(--terra);
+    color: white;
+    font-family: var(--kufi);
+    font-weight: 700;
+    font-size: 1.08rem;
+    box-shadow: 0 4px 0 var(--terra-d);
+    cursor: pointer;
+    margin-top: 14px;
+  }
+  .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--terra-d); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--rose);
+    box-shadow: none;
+    border: 1.5px solid #f0d2c8;
+  }
+
+  .status {
+    min-height: 1.5em;
+    margin: 10px 0 0;
+    text-align: center;
+    font-size: 0.98rem;
+    color: transparent;
+  }
+  .status.show { color: var(--rose); }
+  .status.show.good { color: var(--sage); }
+
+  /* Cover */
+  .cover { text-align: center; padding: 34px 22px 22px; position: relative; }
+  .cover .frame {
+    position: absolute;
+    inset: 12px;
+    border: 1.5px solid #f1e2d2;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+  .cover .frame::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid #f7eee4;
+    border-radius: 16px;
+  }
+  .grade {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    background: #f8efe4;
+    color: var(--rose);
+    font-family: var(--kufi);
+    font-weight: 700;
+    font-size: 0.86rem;
+    border-radius: 999px;
+    padding: 6px 12px;
+    margin-bottom: 8px;
+  }
+  .cover h1 {
+    font-family: var(--kufi);
+    font-size: clamp(2rem, 8vw, 2.55rem);
+    line-height: 1.35;
+    margin: 6px 0 4px;
+    color: #6e3832;
+    font-weight: 700;
+  }
+  .cover .sub {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .rule-line {
+    margin: 14px auto 0;
+    color: var(--rose);
+    font-weight: 700;
+    font-size: 1.12rem;
+  }
+  .quote {
+    margin: 16px auto 0;
+    max-width: 280px;
+    background: #fff8ee;
+    border: 1px solid #f3e4cc;
+    border-radius: 18px;
+    padding: 12px 14px;
+    font-size: 1.25rem;
+    line-height: 1.8;
+  }
+  .quote b { color: var(--rose); font-weight: 700; }
+  .cover-rose { width: min(230px, 70%); height: auto; display: block; margin: 8px auto 0; }
+
+  /* Story */
+  .story-card {
+    background: #fffaf3;
+    border: 1px solid #f3e6d4;
+    border-radius: 20px;
+    padding: 16px 14px 14px;
+  }
+  .story {
+    margin: 0;
+    font-size: 1.24rem;
+    line-height: 2.15;
+  }
+  .story .marks { color: var(--muted); }
+  .tok {
+    appearance: none;
+    display: inline;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    padding: 0 0.08em;
+    border-radius: 8px;
+    cursor: pointer;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .tok.hit { box-shadow: 0 0 0 0 transparent; }
+  .tok.hit[data-token="a"] { background: #f6d2c4; }
+  .tok.hit[data-token="b"] { background: #dceab8; }
+  .tok.hit[data-token="c"] { background: #f8e4ae; }
+  .tok.hit[data-token="d"] { background: #d3e5f5; }
+  .tok.hit[data-token="e"] { background: #e4d6f5; }
+  .tok.flash { background: #f8d7d2; }
+  .count {
+    margin: 12px 0 0;
+    text-align: center;
+    color: var(--muted);
+    font-family: var(--kufi);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  /* Table game */
+  .sentence {
+    background: #fff8ee;
+    border: 1px solid #f3e4cc;
+    border-radius: 18px;
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 1.35rem;
+    line-height: 1.8;
+    margin: 0 0 8px;
+  }
+  .round-label {
+    text-align: center;
+    color: var(--muted);
+    font-family: var(--kufi);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .pillar { min-width: 0; }
+  .ph {
+    text-align: center;
+    color: white;
+    font-family: var(--kufi);
+    font-weight: 700;
+    font-size: 0.92rem;
+    border-radius: 12px 12px 0 0;
+    padding: 8px 6px 7px;
+  }
+  .ps {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: #fbf7f1;
+    padding: 4px 4px 6px;
+  }
+  .pillar.r1 .ph { background: var(--blue); }
+  .pillar.r2 .ph { background: var(--sage); }
+  .drop {
+    min-height: 68px;
+    border: 1.5px dashed #e0d2c2;
+    border-top: 0;
+    border-radius: 0 0 16px 16px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    transition: background .15s ease, box-shadow .15s ease;
+  }
+  .drop.over {
+    background: #fff8ea;
+    box-shadow: inset 0 0 0 2px var(--gold);
+  }
+  .drop.filled {
+    border-style: solid;
+    border-color: #d5e3c4;
+    background: #f7fbf3;
+  }
+  .drop.nope { background: #fdeceb; }
+
+  .tray {
+    margin-top: 14px;
+    background: #f7f1e6;
+    border: 1px solid #f0e3d2;
+    border-radius: 18px;
+    padding: 10px;
+  }
+  .tray-label {
+    margin: 0 0 8px;
+    text-align: center;
+    color: var(--muted);
+    font-family: var(--kufi);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    min-height: 52px;
+    align-items: center;
+  }
+  .chip {
+    appearance: none;
+    font-family: var(--naskh);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: white;
+    border: 1.5px solid #eadccb;
+    border-radius: 14px;
+    padding: 10px 12px;
+    min-height: 48px;
+    box-shadow: 0 3px 0 #eadccb;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+    line-height: 1.45;
+  }
+  .chip.selected {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px var(--gold-s), 0 3px 0 #e2c48a;
+  }
+  .chip.lifting {
+    cursor: grabbing;
+    box-shadow: 0 16px 28px rgba(70, 45, 30, 0.18);
+  }
+  .chip.locked {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    min-height: 0;
+    cursor: default;
+    font-size: 1.08rem;
+    text-align: center;
+  }
+  .chip.nope { animation: shake .32s linear; }
+  .placeholder {
+    display: inline-block;
+    border-radius: 14px;
+    border: 1.5px dashed #e4d5c4;
+    box-sizing: border-box;
+  }
+  @keyframes shake {
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(2px); }
+  }
+
+  .hint {
+    margin: 8px 0 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  table.sum {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    font-size: 1.05rem;
+  }
+  table.sum th, table.sum td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid #f0e4d6;
+  }
+  table.sum th {
+    color: white;
+    font-family: var(--kufi);
+    font-size: 0.92rem;
+  }
+  table.sum th:first-child { background: var(--blue); }
+  table.sum th:last-child { background: var(--sage); }
+  table.sum td { background: #fff; font-weight: 700; }
+  table.sum tr:nth-child(even) td { background: #fbf8f3; }
+  table.sum tr:last-child td { border-bottom: 0; }
+
+  /* Matching */
+  .match { position: relative; margin-top: 4px; }
+  .wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px;
+    position: relative;
+    z-index: 1;
+  }
+  .col { display: flex; flex-direction: column; gap: 10px; }
+  .col-h {
+    text-align: center;
+    font-family: var(--kufi);
+    font-weight: 700;
+    font-size: 0.86rem;
+    margin: 0 0 2px;
+  }
+  .col.mubtada .col-h { color: #a07820; }
+  .col.khabar .col-h { color: var(--sage); }
+  .pair {
+    appearance: none;
+    width: 100%;
+    text-align: center;
+    font-family: var(--naskh);
+    font-weight: 700;
+    font-size: 1.02rem;
+    line-height: 1.45;
+    min-height: 64px;
+    padding: 10px 8px;
+    border-radius: 16px;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .mubtada .pair {
+    background: #fff9ee;
+    border: 1.5px solid #f0ddb4;
+    box-shadow: 0 3px 0 #f0ddb4;
+  }
+  .khabar .pair {
+    background: #f6faef;
+    border: 1.5px solid #d5e4c4;
+    box-shadow: 0 3px 0 #d5e4c4;
+  }
+  .pair .n {
+    display: block;
+    font-family: var(--kufi);
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .pair.on {
+    box-shadow: 0 0 0 3px #f6e3bc, 0 3px 0 #e2c48a;
+    border-color: var(--gold);
+  }
+  .pair.used { opacity: 0.72; }
+  .pair.bad { animation: shake .32s linear; }
+  .written {
+    margin-top: 16px;
+    background: #fffaf3;
+    border: 1px solid #f3e6d4;
+    border-radius: 18px;
+    padding: 12px 12px 6px;
+  }
+  .written h2 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    font-family: var(--kufi);
+    color: var(--rose);
+    font-weight: 700;
+    text-align: center;
+  }
+  .made {
+    margin: 0 0 8px;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+  .made .m { background: #fff1cc; border-radius: 8px; padding: 0 5px; }
+  .made .k { background: #e7f3d4; border-radius: 8px; padding: 0 5px; }
+
+  /* Flower */
+  .bloom {
+    position: relative;
+    width: calc(100% + 8px);
+    margin-inline: -4px;
+    aspect-ratio: 360 / 470;
+  }
+  .flower-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .spot {
+    position: absolute;
+    z-index: 2;
+    width: 108px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+  }
+  .spot-scent { left: 50%; top: 14%; }
+  .spot-colors { left: 79%; top: 27%; }
+  .spot-seeds { left: 72%; top: 64%; }
+  .spot-shape { left: 28%; top: 64%; }
+  .spot-leaves { left: 21%; top: 27%; }
+  .anchor {
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    max-width: 112px;
+    background: rgba(255,255,255,.86);
+    border-radius: 999px;
+    padding: 1px 8px;
+  }
+  .slot {
+    min-height: 38px;
+    min-width: 92px;
+    max-width: 112px;
+    border-radius: 12px;
+    border: 1.5px dashed rgba(80, 55, 40, 0.35);
+    background: rgba(255,255,255,.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px;
+  }
+  .spot.filled .slot {
+    border-color: transparent;
+    background: rgba(255,255,255,.92);
+  }
+  .spot .chip.locked {
+    font-size: 0.92rem;
+    line-height: 1.3;
+    max-width: 104px;
+    white-space: normal;
+  }
+  .spot.over .slot,
+  body.has-selection .spot:not(.filled) .slot {
+    background: #fff;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201, 146, 46, 0.22);
+  }
+  .core {
+    position: absolute;
+    left: 50%;
+    top: 41%;
+    width: 92px;
+    height: 92px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 4;
+    background: radial-gradient(circle at 35% 32%, #fff6d4, #f4d36a 58%, #e7b84a);
+    box-shadow:
+      0 0 0 7px rgba(255,255,255,.8),
+      0 8px 16px rgba(170, 120, 40, 0.16);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.25;
+  }
+  .core span { font-size: 0.95rem; font-weight: 700; }
+  .core strong { font-size: 1.12rem; }
+  .core.bloomed { animation: pulse 1.4s ease-in-out 2; }
+  @keyframes pulse {
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+  }
+  .flower-tray { position: sticky; bottom: 0; z-index: 6; margin-top: 4px; }
+
+  /* Rule */
+  .choices {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .choice {
+    appearance: none;
+    min-height: 60px;
+    border-radius: 16px;
+    border: 1.5px solid #eadfce;
+    background: #fff;
+    font-family: var(--naskh);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    cursor: pointer;
+    box-shadow: 0 3px 0 #eadfce;
+  }
+  .choice:active { transform: translateY(1px); }
+  .choice.good {
+    background: var(--sage-s);
+    border-color: #b7cda4;
+    box-shadow: 0 3px 0 #b7cda4;
+    color: #3d5a28;
+  }
+  .choice.dim { opacity: 0.45; }
+  .choice.bad { animation: shake .32s linear; background: #fdeceb; }
+  .rule-card {
+    margin-top: 14px;
+    background: #fff8ee;
+    border: 1px solid #f3e4cc;
+    border-radius: 18px;
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.9;
+    font-weight: 700;
+  }
+  .fill {
+    display: inline-block;
+    background: #f8e4ae;
+    border-radius: 8px;
+    padding: 0 8px;
+    color: var(--rose);
+  }
+  .starters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .starters span {
+    background: white;
+    border: 1px solid #f0e4cc;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-weight: 700;
+  }
+
+  /* Win */
+  .celebrate { text-align: center; padding-top: 28px; }
+  .celebrate h2 {
+    font-family: var(--kufi);
+    font-size: 2rem;
+    margin: 4px 0 6px;
+    color: #6e3832;
+  }
+  .celebrate .lead {
+    margin: 0 auto;
+    max-width: 280px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--rose);
+    line-height: 1.8;
+  }
+  .examples { list-style: none; padding: 0; margin: 16px 0 4px; }
+  .examples li {
+    background: #fffaf3;
+    border: 1px solid #f3e6d4;
+    border-radius: 14px;
+    padding: 10px 12px;
+    margin: 8px 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .examples b {
+    background: #f6d2c4;
+    border-radius: 8px;
+    padding: 0 6px;
+    font-weight: 700;
+  }
+  .float-petals { position: relative; height: 0; }
+  .float-petals i {
+    position: absolute;
+    width: 14px;
+    height: 18px;
+    border-radius: 50% 50% 45% 45%;
+    opacity: 0.75;
+    animation: drift 3.6s ease-in forwards;
+  }
+  .float-petals i:nth-child(1) { background: #f4c7b4; right: 18%; animation-delay: 0s; }
+  .float-petals i:nth-child(2) { background: #d7e6b6; right: 40%; animation-delay: .2s; }
+  .float-petals i:nth-child(3) { background: #e2d4f4; right: 62%; animation-delay: .35s; }
+  .float-petals i:nth-child(4) { background: #d2e5f6; right: 78%; animation-delay: .1s; }
+  @keyframes drift {
+    from { transform: translateY(0) rotate(0); opacity: 0; }
+    15% { opacity: .8; }
+    to { transform: translateY(46px) rotate(18deg); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheet, .core.bloomed, .float-petals i, .chip.nope, .pair.bad, .choice.bad {
+      animation: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <button type="button" class="back" data-action="back" hidden>رجوع</button>
+      <div class="dots" id="dots" hidden></div>
+      <button type="button" class="mute" data-action="mute" aria-pressed="false" aria-label="كتم الصوت">
+        <svg class="ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 10v4h3l4 3V7L7 10H4z"/>
+          <path d="M16 9.5a3.5 3.5 0 0 1 0 5"/>
+          <path d="M18 7a6.5 6.5 0 0 1 0 10"/>
+        </svg>
+        <svg class="ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 10v4h3l4 3V7L7 10H4z"/>
+          <path d="M16 10l4 4M20 10l-4 4"/>
+        </svg>
+      </button>
+    </header>
+    <main id="stage"></main>
+  </div>
+  <noscript><p style="text-align:center;padding:24px">يحتاج هذا الدرس إلى تشغيل جافاسكربت في المتصفح.</p></noscript>
+
+<script>
+"use strict";
+
+const AR = "٠١٢٣٤٥٦٧٨٩";
+const ar = (n) => String(n).replace(/\d/g, (d) => AR[d]);
+
+const storyParts = [
+  { type: "nom", id: "a", text: "الأبُ مسافرٌ" },
+  { type: "gap", text: "، و" },
+  { type: "nom", id: "b", text: "قلبُ سعيدٍ يشتاقُ لرؤيته" },
+  { type: "gap", text: "، " },
+  { type: "decoy", id: "d1", text: "وها هو ذا ينظرُ إلى استعداداتِ استقبالِه" },
+  { type: "gap", text: ": " },
+  { type: "nom", id: "c", text: "البيتُ مرتَّبٌ" },
+  { type: "gap", text: "، و" },
+  { type: "nom", id: "d", text: "الحلوى اللذيذةُ على الطاولةِ" },
+  { type: "gap", text: "، و" },
+  { type: "nom", id: "e", text: "الطعامُ رائحتُهُ زكيةٌ" },
+  { type: "gap", text: "، " },
+  { type: "decoy", id: "d2", text: "ولا ينقصُ إلا أن يرى والدَهُ، فيحتضنَهُ ليبدِّدَ آلامَ الفراقِ" },
+  { type: "gap", text: "." }
+];
+
+const rounds = [
+  {
+    sentence: "الأبُ مسافرٌ",
+    chips: [
+      { role: "r1", text: "الأب" },
+      { role: "r2", text: "مسافر" },
+      { role: "no", text: "البيت" }
+    ],
+    r1: "الأب",
+    r2: "مسافر"
+  },
+  {
+    sentence: "قلبُ سعيدٍ يشتاقُ لرؤيته",
+    chips: [
+      { role: "r1", text: "قلب سعيد" },
+      { role: "r2", text: "يشتاق لرؤيته" },
+      { role: "no", text: "مسافر" }
+    ],
+    r1: "قلب سعيد",
+    r2: "يشتاق لرؤيته"
+  },
+  {
+    sentence: "البيتُ مرتَّبٌ",
+    chips: [
+      { role: "r1", text: "البيت" },
+      { role: "r2", text: "مرتّب" },
+      { role: "no", text: "على الطاولة" }
+    ],
+    r1: "البيت",
+    r2: "مرتّب"
+  },
+  {
+    sentence: "الحلوى اللذيذةُ على الطاولةِ",
+    chips: [
+      { role: "r1", text: "الحلوى اللذيذة" },
+      { role: "r2", text: "على الطاولة" },
+      { role: "no", text: "رائحته زكية" }
+    ],
+    r1: "الحلوى اللذيذة",
+    r2: "على الطاولة"
+  },
+  {
+    sentence: "الطعامُ رائحتُهُ زكيةٌ",
+    chips: [
+      { role: "r1", text: "الطعام" },
+      { role: "r2", text: "رائحته زكية" },
+      { role: "no", text: "مرتّب" }
+    ],
+    r1: "الطعام",
+    r2: "رائحته زكية"
+  }
+];
+
+const pairs = [
+  { id: "quran", m: "القرآن الكريم", k: "عظيم" },
+  { id: "lemon", m: "شجرة الليمون", k: "أمام البيت" },
+  { id: "school", m: "المدرسة", k: "ساحتها نظيفة" },
+  { id: "workers", m: "العاملون", k: "يخلصون في أعمالهم" }
+];
+
+const petals = [
+  { id: "scent", a: 0, color: "#f4c7b4", anchor: "الرائحة", anchorFirst: true, chip: "تعطّر المكان" },
+  { id: "colors", a: 72, color: "#d7e6b6", anchor: "زاهية", anchorFirst: false, chip: "ألوانها" },
+  { id: "seeds", a: 144, color: "#c6e7de", anchor: "تنمو في وسطها", anchorFirst: false, chip: "البذور الصغيرة" },
+  { id: "shape", a: 216, color: "#d2e5f6", anchor: "شكلها", anchorFirst: true, chip: "جذّاب" },
+  { id: "leaves", a: 288, color: "#e2d4f4", anchor: "الأوراق", anchorFirst: true, chip: "لونها أخضر" }
+];
+
+const state = {
+  screen: 0,
+  found: new Set(),
+  round: 0,
+  roundKey: -1,
+  roundOrder: [],
+  tableDone: false,
+  khabarOrder: null,
+  pickM: null,
+  matches: {},
+  flowerOrder: null,
+  flower: {},
+  ruleOk: false
+};
+
+const Sound = {
+  ctx: null,
+  muted: false,
+  unlock() {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!this.ctx) this.ctx = new AC();
+      if (this.ctx.state === "suspended") this.ctx.resume();
+    } catch (err) { /* audio optional */ }
+  },
+  tone(freq, dur, type, vol, when) {
+    if (this.muted || !this.ctx) return;
+    const t = when || this.ctx.currentTime;
+    const o = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(this.ctx.destination);
+    o.start(t);
+    o.stop(t + dur + 0.02);
+  },
+  tap() { this.tone(540, 0.06, "sine", 0.03); },
+  ok() {
+    this.tone(523, 0.12, "sine", 0.045);
+    this.tone(659, 0.16, "sine", 0.04, (this.ctx ? this.ctx.currentTime : 0) + 0.09);
+  },
+  bad() { this.tone(180, 0.14, "triangle", 0.035); },
+  done() {
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    this.tone(523, 0.12, "sine", 0.04, t);
+    this.tone(659, 0.12, "sine", 0.04, t + 0.1);
+    this.tone(784, 0.2, "sine", 0.04, t + 0.2);
+  },
+  win() {
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    [523, 659, 784, 1046].forEach((f, i) => this.tone(f, 0.22, "sine", 0.04, t + i * 0.12));
+  }
+};
+
+try {
+  Sound.muted = localStorage.getItem("jumla-ismiyya-mute") === "1";
+} catch (err) { /* private mode */ }
+
+function shuffle(list) {
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function roseSVG() {
+  return `
+  <svg class="cover-rose" viewBox="0 0 220 200" aria-hidden="true">
+    <ellipse cx="68" cy="168" rx="48" ry="16" transform="rotate(-34 68 168)" fill="#7ea36a"/>
+    <ellipse cx="154" cy="170" rx="48" ry="16" transform="rotate(32 154 170)" fill="#6b9458"/>
+    <path d="M110 146 v30" stroke="#5d8748" stroke-width="5" stroke-linecap="round"/>
+    <g fill="none">
+      <g transform="translate(110 92)">
+        <ellipse cy="-48" rx="26" ry="40" fill="#f4c7b4"/>
+        <ellipse cy="-48" rx="26" ry="40" fill="#d7e6b6" transform="rotate(72)"/>
+        <ellipse cy="-48" rx="26" ry="40" fill="#c6e7de" transform="rotate(144)"/>
+        <ellipse cy="-48" rx="26" ry="40" fill="#d2e5f6" transform="rotate(216)"/>
+        <ellipse cy="-48" rx="26" ry="40" fill="#e2d4f4" transform="rotate(288)"/>
+        <circle r="28" fill="#f6d56e"/>
+        <circle r="16" fill="#fff1c2" opacity=".85"/>
+      </g>
+    </g>
+  </svg>`;
+}
+
+const stage = document.getElementById("stage");
+let sayTimer = 0;
+
+function revealNext() {
+  const btn = stage.querySelector("[data-action='next']");
+  if (!btn) return;
+  btn.hidden = false;
+  btn.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
+function say(msg, kind) {
+  const el = document.getElementById("status");
+  if (!el) return;
+  el.textContent = msg || "";
+  el.classList.toggle("show", Boolean(msg));
+  el.classList.toggle("good", kind === "good");
+  clearTimeout(sayTimer);
+  if (msg) sayTimer = setTimeout(() => el.classList.remove("show"), 1700);
+}
+
+function head(num, text) {
+  return `<p class="kicker">الجملة الاسمية</p>
+    <div class="ex"><span class="ex-num">${ar(num)}</span><p>${text}</p></div>`;
+}
+
+function nextBtn(label) {
+  return `<button type="button" class="btn" data-action="next" hidden>${label || "أكمل"}</button>`;
+}
+
+function updateChrome() {
+  const s = state.screen;
+  document.querySelector(".back").hidden = s === 0;
+  const dots = document.getElementById("dots");
+  dots.hidden = s === 0;
+  dots.innerHTML = [1, 2, 3, 4, 5, 6].map((i) => {
+    const cls = i < s ? "done" : i === s ? "now" : "";
+    return `<i class="${cls}"></i>`;
+  }).join("");
+  const mute = document.querySelector(".mute");
+  mute.setAttribute("aria-pressed", Sound.muted ? "true" : "false");
+  mute.setAttribute("aria-label", Sound.muted ? "تشغيل الصوت" : "كتم الصوت");
+}
+
+function go(n) {
+  cancelDrag();
+  document.body.classList.remove("has-selection");
+  state.screen = n;
+  const screens = [renderCover, renderStory, renderTable, renderMatch, renderFlower, renderRule, renderWin];
+  stage.innerHTML = screens[n]();
+  updateChrome();
+  if (n === 3) requestAnimationFrame(() => requestAnimationFrame(drawWires));
+  if (n === 6) Sound.win();
+  const showNext = stage.querySelector("[data-action='next']");
+  if (showNext && !showNext.hidden) showNext.scrollIntoView({ block: "nearest" });
+}
+
+function restart() {
+  state.found = new Set();
+  state.round = 0;
+  state.roundKey = -1;
+  state.roundOrder = [];
+  state.tableDone = false;
+  state.khabarOrder = null;
+  state.pickM = null;
+  state.matches = {};
+  state.flowerOrder = null;
+  state.flower = {};
+  state.ruleOk = false;
+  go(0);
+}
+
+/* ---------- drag + tap ---------- */
+let gesture = null;
+let suppressClick = false;
+
+function clearLift(chip) {
+  chip.classList.remove("lifting");
+  chip.style.position = "";
+  chip.style.left = "";
+  chip.style.top = "";
+  chip.style.width = "";
+  chip.style.height = "";
+  chip.style.transform = "";
+  chip.style.zIndex = "";
+}
+
+function flyBack(chip, placeholder) {
+  const from = chip.getBoundingClientRect();
+  clearLift(chip);
+  if (placeholder && placeholder.parentNode) placeholder.replaceWith(chip);
+  const to = chip.getBoundingClientRect();
+  chip.animate(
+    [{ transform: `translate(${from.left - to.left}px, ${from.top - to.top}px)` }, { transform: "none" }],
+    { duration: 280, easing: "cubic-bezier(.2,.7,.2,1)" }
+  );
+}
+
+function snapChip(chip, zone, placeholder) {
+  const from = chip.getBoundingClientRect();
+  clearLift(chip);
+  chip.classList.remove("selected");
+  document.body.classList.remove("has-selection");
+  const slot = zone.querySelector(".slot") || zone;
+  if (placeholder && placeholder.parentNode) placeholder.remove();
+  slot.appendChild(chip);
+  chip.classList.add("locked");
+  zone.classList.add("filled");
+  const to = chip.getBoundingClientRect();
+  chip.animate(
+    [{ transform: `translate(${from.left - to.left}px, ${from.top - to.top}px)` }, { transform: "none" }],
+    { duration: 260, easing: "cubic-bezier(.2,.7,.2,1)" }
+  );
+  Sound.ok();
+  onCorrect(zone, chip);
+}
+
+function zoneAt(x, y, chip) {
+  chip.style.visibility = "hidden";
+  const el = document.elementFromPoint(x, y);
+  chip.style.visibility = "";
+  return el ? el.closest("[data-drop]") : null;
+}
+
+function markOver(x, y, chip) {
+  document.querySelectorAll("[data-drop].over").forEach((z) => z.classList.remove("over"));
+  const zone = zoneAt(x, y, chip);
+  if (zone && !zone.classList.contains("filled")) zone.classList.add("over");
+}
+
+function tryPlace(chip, zone) {
+  if (!chip || !zone || chip.classList.contains("locked")) return;
+  if (zone.classList.contains("filled")) {
+    Sound.bad();
+    say("هذا المكان ممتلئ");
+    return;
+  }
+  if (zone.dataset.accept !== chip.dataset.role) {
+    Sound.bad();
+    zone.classList.add("nope");
+    chip.classList.add("nope");
+    setTimeout(() => {
+      zone.classList.remove("nope");
+      chip.classList.remove("nope");
+    }, 340);
+    say(state.screen === 4 ? "هذه العبارة لبتلة أخرى" : "هذا الركن لا يناسب الجملة");
+    return;
+  }
+  snapChip(chip, zone, null);
+}
+
+function selectChip(chip) {
+  const cur = document.querySelector(".chip.selected");
+  if (cur === chip) {
+    chip.classList.remove("selected");
+    document.body.classList.remove("has-selection");
+    say("");
+    return;
+  }
+  if (cur) cur.classList.remove("selected");
+  chip.classList.add("selected");
+  document.body.classList.add("has-selection");
+  Sound.tap();
+  say("اختر المكان المناسب");
+}
+
+function lift(chip, clientX, clientY) {
+  const rect = chip.getBoundingClientRect();
+  const ph = document.createElement("span");
+  ph.className = "placeholder";
+  ph.style.width = rect.width + "px";
+  ph.style.height = rect.height + "px";
+  chip.after(ph);
+  gesture.placeholder = ph;
+  chip.classList.add("lifting");
+  chip.classList.remove("selected");
+  chip.style.position = "fixed";
+  chip.style.left = "0";
+  chip.style.top = "0";
+  chip.style.width = rect.width + "px";
+  chip.style.height = rect.height + "px";
+  chip.style.zIndex = "40";
+  gesture.w = rect.width;
+  gesture.h = rect.height;
+  moveChip(clientX, clientY);
+}
+
+function moveChip(x, y) {
+  const w = gesture.w;
+  const h = gesture.h;
+  let top = y - h - 16;
+  if (top < 8) top = y + 20;
+  const left = Math.max(8, Math.min(window.innerWidth - w - 8, x - w / 2));
+  gesture.chip.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+}
+
+function cancelDrag() {
+  if (!gesture) return;
+  const g = gesture;
+  gesture = null;
+  document.querySelectorAll("[data-drop].over").forEach((z) => z.classList.remove("over"));
+  if (g.dragging) flyBack(g.chip, g.placeholder);
+}
+
+function endGesture(e) {
+  const g = gesture;
+  gesture = null;
+  document.querySelectorAll("[data-drop].over").forEach((z) => z.classList.remove("over"));
+  if (!g.dragging) {
+    selectChip(g.chip);
+    return;
+  }
+  suppressClick = true;
+  const zone = zoneAt(e.clientX, e.clientY, g.chip);
+  if (zone && !zone.classList.contains("filled") && zone.dataset.accept === g.chip.dataset.role) {
+    snapChip(g.chip, zone, g.placeholder);
+    return;
+  }
+  if (zone && !zone.classList.contains("filled")) {
+    Sound.bad();
+    zone.classList.add("nope");
+    setTimeout(() => zone.classList.remove("nope"), 340);
+    say(state.screen === 4 ? "هذه العبارة لبتلة أخرى" : "هذا الركن لا يناسب الجملة");
+  }
+  flyBack(g.chip, g.placeholder);
+}
+
+document.addEventListener("pointerdown", (e) => {
+  Sound.unlock();
+  const chip = e.target.closest(".chip");
+  if (!chip || chip.classList.contains("locked")) return;
+  if (e.button != null && e.button !== 0) return;
+  gesture = {
+    chip,
+    pid: e.pointerId,
+    x: e.clientX,
+    y: e.clientY,
+    dragging: false,
+    placeholder: null,
+    w: 0,
+    h: 0
+  };
+  try { chip.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+  e.preventDefault();
+}, true);
+
+document.addEventListener("pointermove", (e) => {
+  if (!gesture || e.pointerId !== gesture.pid) return;
+  const dx = e.clientX - gesture.x;
+  const dy = e.clientY - gesture.y;
+  if (!gesture.dragging) {
+    if (dx * dx + dy * dy < 64) return;
+    gesture.dragging = true;
+    document.body.classList.remove("has-selection");
+    lift(gesture.chip, e.clientX, e.clientY);
+  }
+  e.preventDefault();
+  moveChip(e.clientX, e.clientY);
+  markOver(e.clientX, e.clientY, gesture.chip);
+}, { passive: false });
+
+document.addEventListener("pointerup", (e) => {
+  if (gesture && e.pointerId === gesture.pid) {
+    endGesture(e);
+    return;
+  }
+  const zone = e.target.closest("[data-drop]");
+  const selected = document.querySelector(".chip.selected");
+  if (zone && selected) tryPlace(selected, zone);
+});
+
+document.addEventListener("pointercancel", () => {
+  if (!gesture) return;
+  const g = gesture;
+  gesture = null;
+  if (g.dragging) flyBack(g.chip, g.placeholder);
+});
+
+document.addEventListener("click", (e) => {
+  if (suppressClick) {
+    suppressClick = false;
+    e.preventDefault();
+    e.stopPropagation();
+    return;
+  }
+  const actionEl = e.target.closest("[data-action]");
+  if (actionEl) {
+    const act = actionEl.dataset.action;
+    if (act === "start") go(1);
+    else if (act === "next") go(state.screen + 1);
+    else if (act === "back") go(Math.max(0, state.screen - 1));
+    else if (act === "restart") restart();
+    else if (act === "mute") toggleMute();
+    return;
+  }
+  const tok = e.target.closest("[data-token]");
+  if (tok && state.screen === 1) onStoryTap(tok);
+  const choice = e.target.closest("[data-choice]");
+  if (choice && state.screen === 5) onRule(choice);
+  const card = e.target.closest("[data-pair]");
+  if (card && state.screen === 3) onMatchTap(card);
+}, true);
+
+function toggleMute() {
+  Sound.muted = !Sound.muted;
+  try { localStorage.setItem("jumla-ismiyya-mute", Sound.muted ? "1" : "0"); } catch (err) { /* ignore */ }
+  updateChrome();
+  if (!Sound.muted) {
+    Sound.unlock();
+    Sound.tap();
+  }
+}
+
+function onCorrect(zone, chip) {
+  if (state.screen === 2) onTablePlaced();
+  if (state.screen === 4) onFlowerPlaced(zone);
+}
+
+/* ---------- screens ---------- */
+function renderCover() {
+  return `
+  <section class="sheet cover">
+    <div class="frame"></div>
+    <div class="grade">لغتي الجميلة · الصف الخامس</div>
+    ${roseSVG()}
+    <h1>الجملة الاسمية</h1>
+    <p class="sub">سلطنة عُمان</p>
+    <p class="rule-line">تبدأ باسم</p>
+    <div class="quote">« <b>الأبُ</b> مسافرٌ »</div>
+    <button type="button" class="btn" data-action="start">ابدأ الدرس</button>
+  </section>`;
+}
+
+function renderStory() {
+  const bits = storyParts.map((p) => {
+    if (p.type === "gap") return `<span class="gap">${p.text}</span>`;
+    const hit = p.type === "nom" && state.found.has(p.id) ? " hit" : "";
+    return `<button type="button" class="tok${hit}" data-token="${p.id}" data-kind="${p.type}">${p.text}</button>`;
+  }).join("");
+  const done = state.found.size === 5;
+  return `
+  <section class="sheet">
+    ${head(1, "اقرأ الفقرة، ثم اختر الجمل الاسمية.")}
+    <div class="story-card">
+      <p class="story"><span class="marks">«</span>${bits}<span class="marks">»</span></p>
+    </div>
+    <p class="count" id="count">${done ? "هذه الجمل تبدأ بأسماء" : `وجدت ${ar(state.found.size)} من ${ar(5)}`}</p>
+    <p class="status" id="status" aria-live="polite"></p>
+    <button type="button" class="btn" data-action="next" ${done ? "" : "hidden"}>أكمل</button>
+  </section>`;
+}
+
+function onStoryTap(tok) {
+  const kind = tok.dataset.kind;
+  const id = tok.dataset.token;
+  if (kind === "nom") {
+    if (state.found.has(id)) return;
+    state.found.add(id);
+    tok.classList.add("hit");
+    Sound.ok();
+    const count = document.getElementById("count");
+    const done = state.found.size === 5;
+    if (count) count.textContent = done ? "هذه الجمل تبدأ بأسماء" : `وجدت ${ar(state.found.size)} من ${ar(5)}`;
+    if (done) {
+      revealNext();
+      say("أحسنت", "good");
+      Sound.done();
+    }
+    return;
+  }
+  tok.classList.add("flash");
+  setTimeout(() => tok.classList.remove("flash"), 360);
+  Sound.bad();
+  say("هذه ليست جملة اسمية");
+}
+
+function renderTable() {
+  if (state.tableDone) {
+    const rows = rounds.map((r) => `<tr><td>${r.r1}</td><td>${r.r2}</td></tr>`).join("");
+    return `
+    <section class="sheet">
+      ${head(2, "ركنا الجملة الاسمية: مبتدأ وخبر.")}
+      <table class="sum">
+        <thead><tr><th>الركن الأول</th><th>الركن الثاني</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <p class="hint">الركن الأول مبتدأ، والركن الثاني خبر.</p>
+      <button type="button" class="btn" data-action="next">أكمل</button>
+    </section>`;
+  }
+  const round = rounds[state.round];
+  if (state.roundKey !== state.round) {
+    state.roundOrder = shuffle(round.chips.map((_, i) => i));
+    state.roundKey = state.round;
+  }
+  const chips = state.roundOrder.map((i) => {
+    const c = round.chips[i];
+    return `<button type="button" class="chip" data-role="${c.role}">${c.text}</button>`;
+  }).join("");
+  return `
+  <section class="sheet">
+    ${head(2, "اسحب الركن الأول والركن الثاني إلى مكانهما.")}
+    <p class="sentence">${round.sentence}</p>
+    <p class="round-label">الجملة ${ar(state.round + 1)} من ${ar(rounds.length)}</p>
+    <div class="pillars">
+      <div class="pillar r1">
+        <div class="ph">الركن الأول</div>
+        <div class="ps">المبتدأ</div>
+        <div class="drop" data-drop data-accept="r1"></div>
+      </div>
+      <div class="pillar r2">
+        <div class="ph">الركن الثاني</div>
+        <div class="ps">الخبر</div>
+        <div class="drop" data-drop data-accept="r2"></div>
+      </div>
+    </div>
+    <div class="tray">
+      <p class="tray-label">اسحب أو اختر</p>
+      <div class="bank">${chips}</div>
+    </div>
+    <p class="status" id="status" aria-live="polite"></p>
+  </section>`;
+}
+
+function onTablePlaced() {
+  const drops = stage.querySelectorAll("[data-drop]");
+  if (![...drops].every((d) => d.classList.contains("filled"))) return;
+  say("اكتملت الجملة", "good");
+  setTimeout(() => {
+    if (state.screen !== 2 || state.tableDone) return;
+    if (state.round < rounds.length - 1) {
+      state.round += 1;
+      go(2);
+    } else {
+      state.tableDone = true;
+      Sound.done();
+      go(2);
+    }
+  }, 650);
+}
+
+function renderMatch() {
+  if (!state.khabarOrder) state.khabarOrder = shuffle(pairs.map((p) => p.id));
+  const mCards = pairs.map((p, i) => {
+    const used = state.matches[p.id] ? " used" : "";
+    const on = state.pickM === p.id ? " on" : "";
+    return `<button type="button" class="pair${used}${on}" data-pair="${p.id}" data-side="m"><span class="n">${ar(i + 1)}</span>${p.m}</button>`;
+  }).join("");
+  const kCards = state.khabarOrder.map((id) => {
+    const p = pairs.find((x) => x.id === id);
+    const used = Object.values(state.matches).includes(id) ? " used" : "";
+    return `<button type="button" class="pair${used}" data-pair="${p.id}" data-side="k">${p.k}</button>`;
+  }).join("");
+  const done = Object.keys(state.matches).length === pairs.length;
+  return `
+  <section class="sheet">
+    ${head(3, "اربط بين ركني الجملة الاسمية بخط.")}
+    <div class="match" id="matchBoard">
+      <svg class="wires" id="wires" aria-hidden="true"></svg>
+      <div class="cols">
+        <div class="col mubtada">
+          <p class="col-h">الركن الأول</p>
+          ${mCards}
+        </div>
+        <div class="col khabar">
+          <p class="col-h">الركن الثاني</p>
+          ${kCards}
+        </div>
+      </div>
+    </div>
+    <div class="match-extra">${done ? writtenHTML() : ""}</div>
+    <p class="status" id="status" aria-live="polite"></p>
+    <button type="button" class="btn" data-action="next" ${done ? "" : "hidden"}>أكمل</button>
+  </section>`;
+}
+
+function writtenHTML() {
+  const lines = pairs.map((p) => `<p class="made"><span class="m">${p.m}</span> <span class="k">${p.k}</span></p>`).join("");
+  return `<div class="written"><h2>الجمل الاسمية</h2>${lines}</div>`;
+}
+
+function onMatchTap(card) {
+  if (card.classList.contains("used")) return;
+  const side = card.dataset.side;
+  const id = card.dataset.pair;
+  if (side === "m") {
+    state.pickM = state.pickM === id ? null : id;
+    stage.querySelectorAll(".mubtada .pair").forEach((el) => el.classList.toggle("on", el.dataset.pair === state.pickM));
+    Sound.tap();
+    say(state.pickM ? "اختر الخبر المناسب" : "");
+    return;
+  }
+  if (!state.pickM) {
+    say("اختر الركن الأول أولًا");
+    Sound.tap();
+    return;
+  }
+  const mId = state.pickM;
+  if (id !== mId) {
+    Sound.bad();
+    card.classList.add("bad");
+    const mCard = stage.querySelector(`.mubtada [data-pair="${mId}"]`);
+    if (mCard) mCard.classList.add("bad");
+    drawTempWire(mId, id);
+    setTimeout(() => {
+      card.classList.remove("bad");
+      if (mCard) mCard.classList.remove("bad");
+    }, 360);
+    say("هذا الخبر لا يناسب المبتدأ");
+    return;
+  }
+  state.matches[mId] = id;
+  state.pickM = null;
+  card.classList.add("used");
+  const mCard = stage.querySelector(`.mubtada [data-pair="${mId}"]`);
+  if (mCard) {
+    mCard.classList.add("used");
+    mCard.classList.remove("on");
+  }
+  Sound.ok();
+  drawWires();
+  if (Object.keys(state.matches).length === pairs.length) {
+    const extra = stage.querySelector(".match-extra");
+    if (extra && !extra.querySelector(".written")) extra.innerHTML = writtenHTML();
+    revealNext();
+    say("اكتملت الجمل", "good");
+    Sound.done();
+  }
+}
+
+function cardPoint(el, edge) {
+  const board = document.getElementById("matchBoard");
+  const b = board.getBoundingClientRect();
+  const r = el.getBoundingClientRect();
+  return {
+    x: edge === "left" ? r.left - b.left : r.right - b.left,
+    y: r.top - b.top + r.height / 2
+  };
+}
+
+function wirePath(a, k) {
+  const mid = (a.x + k.x) / 2;
+  return `M ${a.x} ${a.y} C ${mid} ${a.y}, ${mid} ${k.y}, ${k.x} ${k.y}`;
+}
+
+function drawWires() {
+  const svg = document.getElementById("wires");
+  const board = document.getElementById("matchBoard");
+  if (!svg || !board) return;
+  const w = board.clientWidth;
+  const h = board.clientHeight;
+  svg.setAttribute("width", w);
+  svg.setAttribute("height", h);
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  svg.innerHTML = "";
+  Object.keys(state.matches).forEach((mId) => {
+    const mEl = stage.querySelector(`.mubtada [data-pair="${mId}"]`);
+    const kEl = stage.querySelector(`.khabar [data-pair="${state.matches[mId]}"]`);
+    if (!mEl || !kEl) return;
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", wirePath(cardPoint(mEl, "left"), cardPoint(kEl, "right")));
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#4f7a38");
+    path.setAttribute("stroke-width", "4");
+    path.setAttribute("stroke-linecap", "round");
+    svg.appendChild(path);
+  });
+}
+
+function drawTempWire(mId, kId) {
+  const svg = document.getElementById("wires");
+  const mEl = stage.querySelector(`.mubtada [data-pair="${mId}"]`);
+  const kEl = stage.querySelector(`.khabar [data-pair="${kId}"]`);
+  if (!svg || !mEl || !kEl) return;
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", wirePath(cardPoint(mEl, "left"), cardPoint(kEl, "right")));
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", "#c4624e");
+  path.setAttribute("stroke-width", "4");
+  path.setAttribute("stroke-linecap", "round");
+  svg.appendChild(path);
+  const len = path.getTotalLength();
+  path.style.strokeDasharray = String(len);
+  path.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 220, fill: "forwards" });
+  setTimeout(() => path.remove(), 420);
+}
+
+window.addEventListener("resize", () => {
+  if (state.screen === 3) drawWires();
+});
+
+function flowerSVG() {
+  return `
+  <svg class="flower-svg" viewBox="0 0 360 470" preserveAspectRatio="none" aria-hidden="true">
+    <ellipse cx="112" cy="392" rx="70" ry="24" transform="rotate(-36 112 392)" fill="#7eaa62"/>
+    <ellipse cx="248" cy="394" rx="70" ry="24" transform="rotate(36 248 394)" fill="#679453"/>
+    <path d="M180 268 v108" stroke="#5c8746" stroke-width="7" stroke-linecap="round"/>
+    <path d="M128 386 c22 8 36 6 52 0" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2" transform="rotate(-36 112 392)"/>
+    <g transform="translate(180 196)">
+      <ellipse cy="-96" rx="54" ry="78" fill="#f6cbb8"/>
+      <ellipse cy="-96" rx="54" ry="78" fill="#d9e8b8" transform="rotate(72)"/>
+      <ellipse cy="-96" rx="54" ry="78" fill="#c9ebe2" transform="rotate(144)"/>
+      <ellipse cy="-96" rx="54" ry="78" fill="#d4e7f7" transform="rotate(216)"/>
+      <ellipse cy="-96" rx="54" ry="78" fill="#e4d6f6" transform="rotate(288)"/>
+      <ellipse cy="-118" rx="22" ry="16" fill="rgba(255,255,255,.45)"/>
+      <circle r="58" fill="#fffdf8"/>
+    </g>
+  </svg>`;
+}
+
+function renderFlower() {
+  if (!state.flowerOrder) state.flowerOrder = shuffle(petals.map((p) => p.id));
+  const spots = petals.map((p) => {
+    const slotFirst = !p.anchorFirst;
+    const inner = slotFirst
+      ? `<div class="slot"></div><span class="anchor">${p.anchor}</span>`
+      : `<span class="anchor">${p.anchor}</span><div class="slot"></div>`;
+    const filled = state.flower[p.id] ? " filled" : "";
+    return `<div class="spot spot-${p.id}${filled}" data-drop data-accept="${p.id}">${inner}</div>`;
+  }).join("");
+  const chips = state.flowerOrder.filter((id) => !state.flower[id]).map((id) => {
+    const p = petals.find((x) => x.id === id);
+    return `<button type="button" class="chip" data-role="${p.id}">${p.chip}</button>`;
+  }).join("");
+  const done = Object.keys(state.flower).length === petals.length;
+  return `
+  <section class="sheet">
+    ${head(4, "أكمل الجملة الاسمية على كل بتلة.")}
+    <div class="bloom">
+      ${flowerSVG()}
+      ${spots}
+      <div class="core${done ? " bloomed" : ""}"><span>الوردة</span><strong>جميلة</strong></div>
+    </div>
+    <div class="tray flower-tray">
+      <p class="tray-label">الصندوق</p>
+      <div class="bank">${chips || `<span class="hint">اكتمل وصف الوردة</span>`}</div>
+    </div>
+    <p class="status" id="status" aria-live="polite"></p>
+    <button type="button" class="btn" data-action="next" ${done ? "" : "hidden"}>أكمل</button>
+  </section>`;
+}
+
+function restoreFlower() {
+  Object.keys(state.flower).forEach((id) => {
+    const zone = stage.querySelector(`[data-drop][data-accept="${id}"]`);
+    if (!zone) return;
+    const p = petals.find((x) => x.id === id);
+    const chip = document.createElement("span");
+    chip.className = "chip locked";
+    chip.dataset.role = id;
+    chip.textContent = p.chip;
+    zone.querySelector(".slot").appendChild(chip);
+  });
+}
+
+function onFlowerPlaced(zone) {
+  const id = zone.dataset.accept;
+  state.flower[id] = true;
+  if (Object.keys(state.flower).length === petals.length) {
+    const core = stage.querySelector(".core");
+    if (core) core.classList.add("bloomed");
+    revealNext();
+    const bank = stage.querySelector(".bank");
+    if (bank) bank.innerHTML = `<span class="hint">اكتمل وصف الوردة</span>`;
+    say("الوردة جميلة", "good");
+    Sound.done();
+  }
+}
+
+function renderRule() {
+  const solved = state.ruleOk;
+  return `
+  <section class="sheet">
+    ${head(5, "اختر نوع الكلمات التي بدأت بها الجمل الاسمية.")}
+    <div class="choices">
+      <button type="button" class="choice${solved ? " dim" : ""}" data-choice="verb" ${solved ? "disabled" : ""}>أفعال</button>
+      <button type="button" class="choice${solved ? " good" : ""}" data-choice="noun" ${solved ? "disabled" : ""}>أسماء</button>
+      <button type="button" class="choice${solved ? " dim" : ""}" data-choice="letter" ${solved ? "disabled" : ""}>حروف</button>
+    </div>
+    <div id="ruleHost">${solved ? ruleHTML() : ""}</div>
+    <p class="status" id="status" aria-live="polite"></p>
+    <button type="button" class="btn" data-action="next" ${solved ? "" : "hidden"}>أكمل</button>
+  </section>`;
+}
+
+function ruleHTML() {
+  return `<div class="rule-card">الجملة الاسمية هي الجملة التي تبدأ بـ<span class="fill">اسم</span>.
+    <div class="starters"><span>الأبُ</span><span>البيتُ</span><span>القرآنُ</span></div>
+  </div>`;
+}
+
+function onRule(btn) {
+  if (state.ruleOk) return;
+  if (btn.dataset.choice !== "noun") {
+    btn.classList.add("bad");
+    setTimeout(() => btn.classList.remove("bad"), 340);
+    Sound.bad();
+    say("انظر إلى أول كلمة في الجملة");
+    return;
+  }
+  state.ruleOk = true;
+  stage.querySelectorAll(".choice").forEach((el) => {
+    el.disabled = true;
+    if (el.dataset.choice === "noun") el.classList.add("good");
+    else el.classList.add("dim");
+  });
+  document.getElementById("ruleHost").innerHTML = ruleHTML();
+  revealNext();
+  say("إجابة صحيحة", "good");
+  Sound.done();
+}
+
+function renderWin() {
+  return `
+  <section class="sheet celebrate">
+    <div class="float-petals" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    ${roseSVG()}
+    <h2>أحسنت</h2>
+    <p class="lead">الجملة الاسمية تبدأ باسم.</p>
+    <ul class="examples">
+      <li><b>الأبُ</b> مسافرٌ</li>
+      <li><b>القرآن الكريم</b> عظيم</li>
+      <li><b>الوردة</b> جميلة</li>
+    </ul>
+    <button type="button" class="btn" data-action="restart">أعد الدرس</button>
+  </section>`;
+}
+
+const oldGo = go;
+/* patch flower restore after render */
+function goWrapped(n) {
+  oldGo(n);
+  if (n === 4) restoreFlower();
+}
+go = goWrapped;
+
+document.addEventListener("pointerdown", () => Sound.unlock(), { once: false });
+go(0);
+</script>
+</body>
+</html>
